@@ -1,5 +1,5 @@
 {
-    "name": "hzwotu/wtcloud-test",
+    "name": "hzwotu/wtcloud",
     "type": "project",
     "autoload": {
         "psr-4": {
