@@ -1,0 +1,29 @@
+{
+    "name": "hzwotu/wtcloud-test",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Wotu\\": "src/"
+        }
+    },
+
+    "authors": [
+        {
+            "name": "wujiehao",
+            "email": "jiehao@busionline.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "openzipkin/zipkin": "^3.0",
+        "guzzlehttp/guzzle": "^7.2",
+        "symfony/http-foundation": "^5.4"
+    },
+    "repositories": {
+        "packagist.org": false,
+        "private-packagist": {
+            "type": "composer",
+            "url": "https://repo.packagist.com/hzwotu/"
+        }
+    }
+}
