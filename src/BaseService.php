@@ -8,7 +8,7 @@ use Zipkin\Propagation\Map;
 
 class BaseService
 {
-    private static $openZipkin = false;
+    private static $openZipkin = true;
 
     /**
      * @param $method
