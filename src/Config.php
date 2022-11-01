@@ -8,6 +8,7 @@ class Config{
         'finance' => 'http://114.55.62.34:36015',
         'admin' => 'http://114.55.62.34:36021',
         'id' => 'http://114.55.62.34:39001',
+        'common-data' => 'http://114.55.62.34:36026',
         'gateway' => 'https://api.cloud.wozhipei.com'
 
     ];

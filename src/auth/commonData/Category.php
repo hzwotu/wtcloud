@@ -1,11 +1,12 @@
 <?php
 namespace Wotu\auth\commonData;
 use Wotu\auth\AuthBase;
+use Wotu\auth\CommonDataBase;
 use Wotu\BaseService;
 
 
 
-class Category extends AuthBase {
+class Category extends CommonDataBase {
 
     /**
      * @param array $param
@@ -18,7 +19,7 @@ class Category extends AuthBase {
         if(empty($alias)){
             throw new \ErrorException("别名不能为空");
         }
-        $url = $this->domainUrl . '/auth/common_data/category_feign/'.$alias;
+        $url = $this->domainUrl . '/common_data/category_feign/'.$alias;
         return BaseService::sendNormalRequest('GET', $url );
     }
 

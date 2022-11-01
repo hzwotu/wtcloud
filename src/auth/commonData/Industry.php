@@ -1,11 +1,12 @@
 <?php
 namespace Wotu\auth\commonData;
 use Wotu\auth\AuthBase;
+use Wotu\auth\CommonDataBase;
 use Wotu\BaseService;
 
 
 
-class Industry extends AuthBase {
+class Industry extends CommonDataBase {
 
     /**
      * @param array $param
@@ -16,7 +17,7 @@ class Industry extends AuthBase {
      */
     public  function list($parentCode = '0'){
         $parentCode = $parentCode ?? '0';
-        $url = $this->domainUrl . '/auth/common_data/industry_php/'.$parentCode;
+        $url = $this->domainUrl . '/common_data/industry_php/'.$parentCode;
         return BaseService::sendNormalRequest('GET', $url );
     }
 

@@ -14,4 +14,9 @@ class Admin extends AdminBase {
         $url = $this->domainUrl . '/admin/v1.1/list';
         return BaseService::sendNormalRequest('POST', $url ,$data);
     }
+
+    public  function getAdminIfo(){
+        $url = $this->domainUrl . '/admin/v1.1/detail_current';
+        return BaseService::sendNormalRequest('GET', $url ,[],true);
+    }
 }
