@@ -16,7 +16,7 @@ class Admin extends AdminBase {
     }
 
     public  function getAdminIfo(){
-        $url = $this->domainUrl . '/admin/v1.1/detail_current';
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/detail_current';
         return BaseService::sendNormalRequest('GET', $url ,[],true);
     }
 }
