@@ -4,6 +4,7 @@ namespace Wotu;
 
 
 use http\Exception\BadMessageException;
+use Zipkin\DefaultTracing;
 use Zipkin\Endpoint;
 use Zipkin\Propagation\Map;
 use Zipkin\Samplers\BinarySampler;
@@ -13,8 +14,17 @@ class ZipKin {
     private static $tracer;
     private static $rootSpan;
     private static $appName = '';
-    private static $instance = null;
-    private static $tracing;
+
+    /**
+     * @var ZipKin|null
+     */
+    private static ?ZipKin $instance = null;
+
+    /**
+     * @var DefaultTracing
+     */
+    private static DefaultTracing $tracing;
+
     private static $span = null;
     private static $childSpan = null;
     // 禁止被实例化
@@ -29,7 +39,16 @@ class ZipKin {
 
     }
 
-    public static function getInstance($httpReporterURL = '',$appName = 'default'){
+    /**
+     * @desc: getInstance 描述
+     * @param string $httpReporterURL
+     * @param string $appName
+     * @return ZipKin|null
+     * @throws \Exception
+     * @author Tinywan(ShaoBo Wan)
+     */
+    public static function getInstance(string $httpReporterURL = '', string $appName = 'default'): ?ZipKin
+    {
 
         if (self::$tracer === null ) {
             if(empty($httpReporterURL)) throw new \Exception('链路错误');
@@ -86,11 +105,12 @@ class ZipKin {
     }
 
     /**
+     * @desc: 新增一个子span
      * @param $executeStr
      * @param string $type
-     * 新增一个子span
+     * @author Tinywan(ShaoBo Wan)
      */
-    public function addChild($executeStr,$type = 'mysql-select'){
+    public function addChild($executeStr, string $type = 'mysql-select'){
         if(self::$span===null){
             self::$span = self::$rootSpan;
         }
@@ -128,27 +148,41 @@ class ZipKin {
     }
 
     /**
+     * @desc: 获取链路的唯一标识
      * @return mixed
-     * 获取链路的唯一标识
+     * @author Tinywan(ShaoBo Wan)
      */
     public function getTraceId(){
         return self::$rootSpan->getContext()->getTraceId();
     }
 
-
+    /**
+     * @desc: 创建一个新链路
+     * @param $localServiceName
+     * @param $localServiceIPv4
+     * @param $httpReporterURL
+     * @param null $localServicePort
+     * @return DefaultTracing|\Zipkin\Tracing
+     * @author Tinywan(ShaoBo Wan)
+     */
     public static function createTracing($localServiceName, $localServiceIPv4,$httpReporterURL , $localServicePort = null){
         $endpoint = Endpoint::create($localServiceName, $localServiceIPv4, null, $localServicePort);
         $reporter = new \Zipkin\Reporters\Http(['endpoint_url' => $httpReporterURL]);
         $sampler = BinarySampler::createAsAlwaysSample();
-        $tracing = TracingBuilder::create()
+        return TracingBuilder::create()
             ->havingLocalEndpoint($endpoint)
             ->havingSampler($sampler)
             ->havingReporter($reporter)
             ->build();
-        return $tracing;
     }
 
-    public function getTracing(){
+    /**
+     * @desc: getTracing 描述
+     * @return DefaultTracing
+     * @author Tinywan(ShaoBo Wan)
+     */
+    public function getTracing(): DefaultTracing
+    {
         return self::$tracing;
     }
 
