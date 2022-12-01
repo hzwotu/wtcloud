@@ -3,7 +3,6 @@
 namespace Wotu;
 
 
-use http\Exception\BadMessageException;
 use Zipkin\DefaultTracing;
 use Zipkin\Endpoint;
 use Zipkin\Propagation\Map;
@@ -27,6 +26,7 @@ class ZipKin {
 
     private static $span = null;
     private static $childSpan = null;
+
     // 禁止被实例化
     private function __construct()
     {
@@ -49,7 +49,6 @@ class ZipKin {
      */
     public static function getInstance(string $httpReporterURL = '', string $appName = 'default'): ?ZipKin
     {
-
         if (self::$tracer === null ) {
             if(empty($httpReporterURL)) throw new \Exception('链路错误');
             self::$appName = $appName ;
@@ -74,6 +73,7 @@ class ZipKin {
 
     /**
      * @param $uri
+     * @param $method
      * @param $params
      * 开始一个根span
      */
@@ -89,9 +89,10 @@ class ZipKin {
     }
 
     /**
-     *结束整个程序
+     * @desc: 结束整个程序
+     * @param array $tagArr
      */
-    public  function endAction($tagArr = []){
+    public  function endAction(array $tagArr = []){
         if ($tagArr !== []) {
             foreach ($tagArr as $key => $val) {
                 self::$rootSpan->tag($key, $val);
@@ -107,10 +108,10 @@ class ZipKin {
     /**
      * @desc: 新增一个子span
      * @param $executeStr
-     * @param string $type
+     * @param $type
      * @author Tinywan(ShaoBo Wan)
      */
-    public function addChild($executeStr, string $type = 'mysql-select'){
+    public function addChild($executeStr, $type = 'mysql-select'){
         if(self::$span===null){
             self::$span = self::$rootSpan;
         }
@@ -135,8 +136,8 @@ class ZipKin {
     }
 
     /**
-     *
-     *结束子span
+     * @desc: 结束子span
+     * @param array $tagArr
      */
     public function finishChild(array $tagArr = []) {
         if (!empty($tagArr)) {
@@ -163,7 +164,6 @@ class ZipKin {
      * @param $httpReporterURL
      * @param null $localServicePort
      * @return DefaultTracing|\Zipkin\Tracing
-     * @author Tinywan(ShaoBo Wan)
      */
     public static function createTracing($localServiceName, $localServiceIPv4,$httpReporterURL , $localServicePort = null){
         $endpoint = Endpoint::create($localServiceName, $localServiceIPv4, null, $localServicePort);
