@@ -107,10 +107,10 @@ class ZipKin {
     /**
      * @desc: 新增一个子span
      * @param $executeStr
-     * @param string $type
+     * @param $type
      * @author Tinywan(ShaoBo Wan)
      */
-    public function addChild($executeStr, string $type = 'mysql-select'){
+    public function addChild($executeStr, $type = 'mysql-select'){
         if(self::$span===null){
             self::$span = self::$rootSpan;
         }
