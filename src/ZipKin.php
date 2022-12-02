@@ -7,11 +7,18 @@ use Zipkin\DefaultTracing;
 use Zipkin\Endpoint;
 use Zipkin\Propagation\Map;
 use Zipkin\Samplers\BinarySampler;
+use Zipkin\Tracer;
 use Zipkin\TracingBuilder;
 
 class ZipKin {
-    private static $tracer;
+
+    /**
+     * @var Tracer
+     */
+    public static Tracer $tracer;
+
     private static $rootSpan;
+
     private static $appName = '';
 
     /**
