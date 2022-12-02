@@ -15,7 +15,7 @@ class ZipKin {
     /**
      * @var Tracer
      */
-    public static Tracer $tracer;
+    public static $tracer;
 
     private static $rootSpan;
 
