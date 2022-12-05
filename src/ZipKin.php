@@ -59,7 +59,8 @@ class ZipKin {
         if (self::$tracer === null ) {
             if(empty($httpReporterURL)) throw new \Exception('链路错误');
             self::$appName = $appName ;
-            $tracing = self::createTracing(self::$appName, $_SERVER["REMOTE_ADDR"],$httpReporterURL);
+            $localIp = $_SERVER["REMOTE_ADDR"] ?? getHostByName(getHostName());
+            $tracing = self::createTracing(self::$appName, $localIp,$httpReporterURL);
             self::$tracing = $tracing;
 
             $request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();

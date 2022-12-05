@@ -9,6 +9,7 @@ class CreateGroupDto extends NormalBaseDto{
         "name" => "",
         "type" => 0,
         "sid" => 0,
+        "url" => "",
     );
 
     public function __construct()
