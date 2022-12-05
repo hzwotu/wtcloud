@@ -9,6 +9,7 @@ class EditGroupDto extends NormalBaseDto{
         "name" => "",
         "type" => 0,
         'id' => 0,
+        "url" => "",
     );
 
     public function __construct()

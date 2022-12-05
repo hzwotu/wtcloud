@@ -98,12 +98,15 @@ class BaseService
         }
         $resultHeader[] = "Content-Type:application/json";
         if ('get' == strtolower($method)) {
-            $result = Http::get($url, $data, $resultHeader);
+            $result = Http::get($url, $data, $resultHeader,1);
         } else {
-            $result = Http::send($url, $method, [], json_encode($data), $resultHeader);
+            $result = Http::send($url, $method, [], json_encode($data), $resultHeader,1);
         }
 //        var_dump($resultHeader);
         $resultData = json_decode($result, true);
+        if (!empty($resultData['httpCode']) && $resultData['httpCode'] == 401) {
+            http_response_code(401);exit;
+        }
 
         if (empty($resultData['messageCode'])) {
             $errorMessage = $resultData['message'] ?? '请求失败';
