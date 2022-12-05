@@ -8,6 +8,7 @@ use Wotu\dto\organization\CreateStaffDto;
 use Wotu\dto\organization\DeleteOrganizationDto;
 use Wotu\dto\organization\DeleteStaffDto;
 use Wotu\dto\organization\EditDepartmentDto;
+use Wotu\dto\organization\EditModulesDto;
 use Wotu\dto\organization\EditOrganizationDto;
 
 class Organization extends AuthBase{
@@ -149,6 +150,19 @@ class Organization extends AuthBase{
     public function deleteStaff($params){
         $url = $this->domainUrl . '/auth/organization/delete_staff_php';
         $requestDto = new DeleteStaffDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
+
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * 编辑站点下组织私有模块
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/组织API/editOrganizationSiteModuleUsingPOST
+     */
+    public function editModules($params){
+        $url = $this->domainUrl . '/auth/organization/edit_modules';
+        $requestDto = new EditModulesDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
