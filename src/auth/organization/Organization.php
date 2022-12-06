@@ -2,12 +2,14 @@
 namespace Wotu\auth\organization;
 use Wotu\auth\AuthBase;
 use Wotu\BaseService;
+use Wotu\dto\organization\CheckPermissionsDto;
 use Wotu\dto\organization\CreateDepartmentDto;
 use Wotu\dto\organization\CreateOrganizationDto;
 use Wotu\dto\organization\CreateStaffDto;
 use Wotu\dto\organization\DeleteOrganizationDto;
 use Wotu\dto\organization\DeleteStaffDto;
 use Wotu\dto\organization\EditDepartmentDto;
+use Wotu\dto\organization\EditModulesDto;
 use Wotu\dto\organization\EditOrganizationDto;
 
 class Organization extends AuthBase{
@@ -149,6 +151,32 @@ class Organization extends AuthBase{
     public function deleteStaff($params){
         $url = $this->domainUrl . '/auth/organization/delete_staff_php';
         $requestDto = new DeleteStaffDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
+
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * 编辑站点下组织私有模块
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/组织API/editOrganizationSiteModuleUsingPOST
+     */
+    public function editModules($params){
+        $url = $this->domainUrl . '/auth/organization/edit_modules';
+        $requestDto = new EditModulesDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
+
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * 权限校验
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/组织API/checkPermissionUsingPOST
+     */
+    public function checkPermissions($params){
+        $url = $this->domainUrl . '/auth/organization/check_permissions';
+        $requestDto = new CheckPermissionsDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
