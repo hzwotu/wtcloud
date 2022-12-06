@@ -2,6 +2,7 @@
 namespace Wotu\auth\organization;
 use Wotu\auth\AuthBase;
 use Wotu\BaseService;
+use Wotu\dto\organization\CheckPermissionsDto;
 use Wotu\dto\organization\CreateDepartmentDto;
 use Wotu\dto\organization\CreateOrganizationDto;
 use Wotu\dto\organization\CreateStaffDto;
@@ -175,7 +176,7 @@ class Organization extends AuthBase{
      */
     public function checkPermissions($params){
         $url = $this->domainUrl . '/auth/organization/check_permissions';
-        $requestDto = new EditModulesDto();
+        $requestDto = new CheckPermissionsDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
