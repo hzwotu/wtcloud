@@ -104,21 +104,25 @@ class BaseService
         }
 //        var_dump($resultHeader);
         $resultData = json_decode($result, true);
-        if (!empty($resultData['httpCode']) && $resultData['httpCode'] == 401) {
-            http_response_code(401);exit;
-        }
-
-        if (empty($resultData['messageCode'])) {
-            $errorMessage = $resultData['message'] ?? '请求失败';
-            throw new \ErrorException($errorMessage);
-        } elseif ($resultData['messageCode'] == 9997) {
-            return [];
-        } elseif ($resultData['messageCode'] != 200) {
+        if (empty($resultData['httpCode'])) {
             $errorMessage = $resultData['message'] ?? '请求失败';
             throw new \ErrorException($errorMessage);
         }
-
-        return $resultData['data'] ?? 'success';
+        if ($resultData['httpCode'] == 200) {
+            if (empty($resultData['messageCode'])) {
+                $errorMessage = $resultData['message'] ?? '请求失败';
+                throw new \ErrorException($errorMessage);
+            } elseif ($resultData['messageCode'] == 9997) {
+                return [];
+            } elseif ($resultData['messageCode'] != 200) {
+                $errorMessage = $resultData['message'] ?? '请求失败';
+                throw new \ErrorException($errorMessage);
+            }
+            return $resultData['data'] ?? 'success';
+        } else {
+            //401 404 403等网关错误
+            return ['error_code' => $resultData['httpCode'], 'message' => $resultData['message'] ?? '请求失败'];
+        }
     }
 
 
