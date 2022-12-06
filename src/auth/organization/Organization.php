@@ -166,6 +166,19 @@ class Organization extends AuthBase{
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * 权限校验
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/组织API/checkPermissionUsingPOST
+     */
+    public function checkPermissions($params){
+        $url = $this->domainUrl . '/auth/organization/check_permissions';
+        $requestDto = new EditModulesDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
+
 
 
 
