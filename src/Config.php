@@ -4,12 +4,12 @@ namespace Wotu;
 class Config{
     private $serviceDomain = [
 //        'auth' => 'http://localhost:36006',
-        'auth' => 'http://47.98.193.2:36006',
-        'finance' => 'http://47.98.193.2:36015',
-        'admin' => 'http://47.98.193.2:36021',
-        'id' => 'http://47.98.193.2:39001',
-        'common-data' => 'http://47.98.193.2:36026',
-        'gateway' => 'https://api.cloud.wozp.cn'
+        'auth' => 'http://47.99.92.21:36006',
+        'finance' => 'http://47.99.92.21.2:36015',
+        'admin' => 'http://47.99.92.21:36021',
+        'id' => 'http://47.99.92.21:39001',
+        'common-data' => 'http://47.99.92.21:36026',
+        'gateway' => 'https://api-pre.cloud.wozp.cn'
     ];
     private $domainUrl;
     public function __construct($domain){
