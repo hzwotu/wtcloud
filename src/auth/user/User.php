@@ -3,6 +3,7 @@ namespace Wotu\auth\user;
 use Wotu\auth\AuthBase;
 use Wotu\BaseService;
 use Wotu\dto\user\CreateUserDto;
+use Wotu\dto\user\UserLoginDto;
 
 
 class User extends AuthBase {
@@ -89,6 +90,19 @@ class User extends AuthBase {
         }
         $url = $this->domainUrl . '/auth/user/v1/user_group_list/'.$userCode;
         return BaseService::sendNormalRequest('GET', $url ,[]);
+    }
+
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * sdk 用户登陆
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/用户API/loginUsingPOST
+     */
+    public function login($params){
+        $url = $this->domainUrl . '/auth/user/v1/login';
+        $requestDto = new UserLoginDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
 
