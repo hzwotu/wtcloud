@@ -100,7 +100,7 @@ class User extends AuthBase {
      * https://api.cloud.wozp.cn/doc.html#/用户服务/用户API/loginUsingPOST
      */
     public function login($params){
-        $url = $this->domainUrl . '/auth/user/v1/login';
+        $url = $this->gatewayDomainUrl . '/auth/user/v1/login';
         $requestDto = new UserLoginDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
