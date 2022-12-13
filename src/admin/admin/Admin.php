@@ -15,7 +15,7 @@ class Admin extends AdminBase
             throw new \Exception('缺少管理员编码');
         }
         $data['codeList'] = $params;
-        $url = $this->domainUrl . '/admin/v1.1/list';
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/list';
         return BaseService::sendNormalRequest('POST', $url, $data,true);
     }
 
