@@ -17,7 +17,7 @@ class Industry extends CommonDataBase {
      */
     public  function list($parentCode = '0'){
         $parentCode = $parentCode ?? '0';
-        $url = $this->domainUrl . '/common_data/industry_php/'.$parentCode;
+        $url = $this->domainUrl . '/common_data/industry/industry_php/'.$parentCode;
         return BaseService::sendNormalRequest('GET', $url );
     }
 
