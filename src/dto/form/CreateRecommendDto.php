@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Wotu\dto\cms;
+namespace Wotu\dto\form;
 
 
 use ErrorException;

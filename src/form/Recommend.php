@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @desc 推荐位管理
  * @author Tinywan(ShaoBo Wan)
@@ -8,16 +9,15 @@
 
 declare(strict_types=1);
 
-namespace Wotu\auth\cms;
+namespace Wotu\form;
 
 
 use ErrorException;
-use Wotu\auth\AuthBase;
 use Wotu\BaseService;
 use Wotu\dto\cms\CreateRecommendDto;
 use Wotu\dto\cms\UpdateRecommendDto;
 
-class Recommend extends AuthBase
+class Recommend extends FormBase
 {
     /**
      * @desc: 推荐位新增
@@ -26,10 +26,11 @@ class Recommend extends AuthBase
      * @throws ErrorException
      * @author Tinywan(ShaoBo Wan)
      */
-    public function create(array $params){
+    public function create(array $params)
+    {
         $url = $this->domainUrl . '/form/recommend/create';
         $requestDto = new CreateRecommendDto();
-        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+        return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params));
     }
 
     /**
@@ -39,10 +40,11 @@ class Recommend extends AuthBase
      * @throws ErrorException
      * @author Tinywan(ShaoBo Wan)
      */
-    public function update(array $params){
+    public function update(array $params)
+    {
         $url = $this->domainUrl . '/form/recommend/modify';
         $requestDto = new UpdateRecommendDto();
-        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+        return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params));
     }
 
     /**
@@ -52,10 +54,11 @@ class Recommend extends AuthBase
      * @throws ErrorException
      * @author Tinywan(ShaoBo Wan)
      */
-    public function detail(string $code){
-        $url = $this->domainUrl . '/form/recommend/delete/'.$code;
+    public function detail(string $code)
+    {
+        $url = $this->domainUrl . '/form/recommend/delete/' . $code;
         $requestDto = new CreateRecommendDto();
-        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+        return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params));
     }
 
     /**
@@ -65,9 +68,10 @@ class Recommend extends AuthBase
      * @throws ErrorException
      * @author Tinywan(ShaoBo Wan)
      */
-    public function delete(string $code){
-        $url = $this->domainUrl . '/form/recommend/delete/'.$code;
+    public function delete(string $code)
+    {
+        $url = $this->domainUrl . '/form/recommend/delete/' . $code;
         $requestDto = new CreateRecommendDto();
-        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($code));
+        return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($code));
     }
 }
