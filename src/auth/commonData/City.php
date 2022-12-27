@@ -17,7 +17,7 @@ class City extends CommonDataBase {
      */
     public  function list($parentCode = 0){
         $parentCode = $parentCode ?? 0;
-        $url = $this->domainUrl . '/common_data/city_php/'.$parentCode;
+        $url = $this->domainUrl . '/common_data/city/city_php/'.$parentCode;
         return BaseService::sendNormalRequest('GET', $url );
     }
 

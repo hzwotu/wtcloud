@@ -20,23 +20,24 @@ class BaseService
      */
     public static function sendRequest($method, $url, $data = [], $needToken = false)
     {
-
-        $zipKin = ZipKin::getInstance();
-        //在一个请求的初试位置 开启一个链路追踪
-//        $zipKin->startAction('php-sdk: '.$url,json_encode($data));
-        $tracing = $zipKin->getTracing();
-        $injector = $tracing->getPropagation()->getInjector(new Map());
-        $zipKin->addChild(json_encode($data),'服务调用');
-        $childSpan = $zipKin->getChildSpan();
-
         $headers = [];
-        $injector($childSpan->getContext(), $headers);
+        if (ZipKin::$tracer) {
+            $zipKin = ZipKin::getInstance();
+            //在一个请求的初试位置 开启一个链路追踪
+            $tracing = $zipKin->getTracing();
+            $injector = $tracing->getPropagation()->getInjector(new Map());
+            $zipKin->addChild(json_encode($data), '服务调用');
+            $childSpan = $zipKin->getChildSpan();
+            $injector($childSpan->getContext(), $headers);
+        }
 
         $headers['Content-Type'] = 'application/json';
         $headers['accept'] = 'application/json, text/plain, */*';
 
         $result = self::send($method,$url,$data,$needToken,$headers);
-        $childSpan->finish();
+        if (isset($childSpan)) {
+            $childSpan->finish();
+        }
         return $result;
     }
 
@@ -91,18 +92,22 @@ class BaseService
         $headers = self::getHeader();
         if (!empty($headers['AUTHORIZATION']) && $needToken) {
             $resultHeader[] = 'Authorization:' . $headers['AUTHORIZATION'];
+            if(isset($headers['X-SITE-ALIAS'])) $resultHeader[] = 'X-Site-Alias:' . $headers['X-SITE-ALIAS'];
         } else {
             $resultHeader[] = 'Authorization:php-sdk';
             $resultHeader[] = 'userCode:php-sdk';
         }
         $resultHeader[] = "Content-Type:application/json";
         if ('get' == strtolower($method)) {
-            $result = Http::get($url, $data, $resultHeader);
+            $result = Http::get($url, $data, $resultHeader,1);
         } else {
-            $result = Http::send($url, $method, [], json_encode($data), $resultHeader);
+            $result = Http::send($url, $method, [], json_encode($data), $resultHeader,1);
         }
 //        var_dump($resultHeader);
         $resultData = json_decode($result, true);
+        if (!empty($resultData['httpCode']) && $resultData['httpCode'] == 401) {
+            http_response_code(401);exit;
+        }
 
         if (empty($resultData['messageCode'])) {
             $errorMessage = $resultData['message'] ?? '请求失败';

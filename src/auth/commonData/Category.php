@@ -19,7 +19,7 @@ class Category extends CommonDataBase {
         if(empty($alias)){
             throw new \ErrorException("别名不能为空");
         }
-        $url = $this->domainUrl . '/common_data/category_feign/'.$alias;
+        $url = $this->domainUrl . '/common_data/category/category_feign/'.$alias;
         return BaseService::sendNormalRequest('GET', $url );
     }
 
