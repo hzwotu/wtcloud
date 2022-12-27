@@ -14,8 +14,8 @@ namespace Wotu\form;
 
 use ErrorException;
 use Wotu\BaseService;
-use Wotu\dto\cms\CreateRecommendDto;
-use Wotu\dto\cms\UpdateRecommendDto;
+use Wotu\dto\form\CreateRecommendDto;
+use Wotu\dto\form\UpdateRecommendDto;
 
 class Recommend extends FormBase
 {
@@ -23,28 +23,24 @@ class Recommend extends FormBase
      * @desc: 推荐位新增
      * @param array $params
      * @return mixed|string
-     * @throws ErrorException
      * @author Tinywan(ShaoBo Wan)
      */
     public function create(array $params)
     {
-        $url = $this->domainUrl . '/form/recommend/create';
-        $requestDto = new CreateRecommendDto();
-        return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params));
+        $this->dto = new CreateRecommendDto();
+        return $this->sendNormalRequest('POST', '/form/recommend/create', $params);
     }
 
     /**
      * @desc: 编辑
      * @param array $params
      * @return mixed|string
-     * @throws ErrorException
      * @author Tinywan(ShaoBo Wan)
      */
     public function update(array $params)
     {
-        $url = $this->domainUrl . '/form/recommend/modify';
-        $requestDto = new UpdateRecommendDto();
-        return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params));
+        $this->dto = new UpdateRecommendDto();
+        return $this->sendNormalRequest('POST', '/form/recommend/modify', $params);
     }
 
     /**
@@ -58,7 +54,7 @@ class Recommend extends FormBase
     {
         $url = $this->domainUrl . '/form/recommend/delete/' . $code;
         $requestDto = new CreateRecommendDto();
-        return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params));
+        return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($code));
     }
 
     /**
@@ -74,4 +70,5 @@ class Recommend extends FormBase
         $requestDto = new CreateRecommendDto();
         return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($code));
     }
+
 }
