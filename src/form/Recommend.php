@@ -17,14 +17,14 @@ use Wotu\BaseService;
 class Recommend extends FormBase
 {
     /**
-     * @desc: 通过sid查询推荐位详情信息
+     * @desc: 通过sid查询推荐位列表信息
      * @param int $siteId
      * @return array|mixed|string
      * @author Tinywan(ShaoBo Wan)
      */
-    public function detailBySiteId(int $siteId)
+    public function listDetailBySiteId(int $siteId)
     {
-        $url = $this->domainUrl.'/form/recommend/detail_by_sid/'.$siteId;
+        $url = $this->domainUrl.'/form/recommend/list_by_sid/'.$siteId;
         return BaseService::sendNormalRequest('GET',$url);
     }
 
