@@ -42,7 +42,6 @@ abstract class FormBase extends BaseRequest
     public function __construct()
     {
         $this->domainUrl =  (new Config('form'))->getServiceDomain();
-        var_dump($this->domainUrl);
         $this->gatewayDomainUrl =  (new Config('gateway'))->getServiceDomain();
     }
 
