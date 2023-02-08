@@ -130,7 +130,7 @@ class User extends AuthBase {
     public function CreateOpenKeyByUserCode($params){
         $url = $this->gatewayDomainUrl . '/auth/backend/app_token/bind';
         $requestDto = new OpenKeyCreateDto();
-        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params),true);
     }
 
 
