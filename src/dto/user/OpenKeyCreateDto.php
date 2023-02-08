@@ -9,7 +9,7 @@ class OpenKeyCreateDto extends NormalBaseDto
 
     protected $param = array(
         "key" => "",
-        "secret" => 0,
+        "secret" => "",
         "sid" => 0,
         "userCode" => ""
     );

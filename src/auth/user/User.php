@@ -115,7 +115,7 @@ class User extends AuthBase {
      * https://api.cloud.wozp.cn/doc.html#/用户服务/用户端-开放API/getTokenUsingPOST
      */
     public function openLogin($params){
-        $url = $this->domainUrl . '/auth/app_token/get_token';
+        $url = $this->gatewayDomainUrl . '/auth/app_token/get_token';
         $requestDto = new OpenLoginDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
@@ -128,7 +128,7 @@ class User extends AuthBase {
      * https://api.cloud.wozp.cn/doc.html#/用户服务/用户端-开放API/getTokenUsingPOST
      */
     public function CreateOpenKeyByUserCode($params){
-        $url = $this->domainUrl . '/auth/backend/app_token/bind';
+        $url = $this->gatewayDomainUrl . '/auth/backend/app_token/bind';
         $requestDto = new OpenKeyCreateDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
