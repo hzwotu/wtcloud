@@ -6,12 +6,12 @@ use ErrorException;
 class Config{
     private $serviceDomain = [
 //        'auth' => 'http://localhost:36006',
-        'form' => 'http://114.55.62.34:36031',
-        'auth' => 'http://114.55.62.34:36006',
-        'finance' => 'http://114.55.62.34:36015',
-        'admin' => 'http://114.55.62.34:36021',
-        'id' => 'http://114.55.62.34:39001',
-        'common-data' => 'http://114.55.62.34:36026',
+        'form' => 'http://192.168.2.90:36031',
+        'auth' => 'http://192.168.2.90:36006',
+        'finance' => 'http://192.168.2.90:36015',
+        'admin' => 'http://192.168.2.90:36021',
+        'id' => 'http://192.168.2.90:39001',
+        'common-data' => 'http://192.168.2.90:36026',
         'gateway' => 'https://api.cloud.wozhipei.com'
     ];
 
