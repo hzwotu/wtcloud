@@ -3,6 +3,8 @@ namespace Wotu\auth\user;
 use Wotu\auth\AuthBase;
 use Wotu\BaseService;
 use Wotu\dto\user\CreateUserDto;
+use Wotu\dto\user\OpenKeyCreateDto;
+use Wotu\dto\user\OpenLoginDto;
 use Wotu\dto\user\UserLoginDto;
 
 
@@ -104,6 +106,33 @@ class User extends AuthBase {
         $requestDto = new UserLoginDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
+
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * sdk 开放平台登陆
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/用户端-开放API/getTokenUsingPOST
+     */
+    public function openLogin($params){
+        $url = $this->gatewayDomainUrl . '/auth/app_token/get_token';
+        $requestDto = new OpenLoginDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
+
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * sdk 开放平台登陆
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/用户端-开放API/getTokenUsingPOST
+     */
+    public function CreateOpenKeyByUserCode($params){
+        $url = $this->gatewayDomainUrl . '/auth/backend/app_token/bind';
+        $requestDto = new OpenKeyCreateDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params),true);
+    }
+
 
 
 
