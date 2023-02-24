@@ -8,4 +8,10 @@ class Id extends IdBase {
         $url = $this->domainUrl . '/id/next_id';
         return BaseService::sendDirectRequest('GET', $url ,[]);
     }
+
+    public function batchId(){
+        $url = $this->domainUrl . '/id/batch_ids';
+        return BaseService::sendDirectRequest('GET', $url ,[]);
+    }
+
 }
