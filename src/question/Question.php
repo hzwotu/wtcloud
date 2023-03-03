@@ -23,7 +23,7 @@ class Question extends QuestionBase
         $params['merchantCode'] = $orgCode;
         $params['pageNo'] = $page;
         $params['pageSize'] = $limit;
-        return BaseService::sendDirectRequest('POST', $url ,$params);
+        return BaseService::sendNormalRequest('POST', $url ,$params);
     }
 
     /**
@@ -33,7 +33,7 @@ class Question extends QuestionBase
      */
     public function questionDetail($examCode) {
         $url = $this->domainUrl . '/question/front/detail/' . $examCode;
-        return BaseService::sendDirectRequest('GET', $url , []);
+        return BaseService::sendNormalRequest('GET', $url , []);
     }
 
     /**
@@ -43,6 +43,6 @@ class Question extends QuestionBase
      */
     public function questionByCode($examCodeArr) {
         $url = $this->domainUrl . '/question/front/list';
-        return BaseService::sendDirectRequest('POST', $url , ['codeList' => $examCodeArr]);
+        return BaseService::sendNormalRequest('POST', $url , ['codeList' => $examCodeArr]);
     }
 }
