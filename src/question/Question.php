@@ -45,4 +45,14 @@ class Question extends QuestionBase
         $url = $this->domainUrl . '/question/front/list';
         return BaseService::sendNormalRequest('POST', $url , ['codeList' => $examCodeArr]);
     }
+
+    /**
+     * 更新试题
+     * @param $params
+     * @return array
+     */
+    public function questionUpdate($params) {
+        $url = $this->domainUrl . '/question/front/updateStatus';
+        return BaseService::sendNormalRequest('POST', $url , $params);
+    }
 }
