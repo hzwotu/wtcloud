@@ -133,7 +133,17 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params),true);
     }
 
-
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * sdk 用户退出
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/用户API/logoutUsingGET
+     */
+    public function logout($params){
+        $url = $this->gatewayDomainUrl . '/auth/user/v1/logout';
+        return BaseService::sendNormalRequest('GET', $url);
+    }
 
 
 
