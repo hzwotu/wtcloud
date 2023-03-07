@@ -134,7 +134,6 @@ class User extends AuthBase {
     }
 
     /**
-     * @param $params
      * @return mixed|string
      */
     public function logout(){
