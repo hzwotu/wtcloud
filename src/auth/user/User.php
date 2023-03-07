@@ -137,7 +137,7 @@ class User extends AuthBase {
      * @param $params
      * @return mixed|string
      */
-    public function logout($params){
+    public function logout(){
         $url = $this->gatewayDomainUrl . '/auth/user/v1/logout';
         return BaseService::sendNormalRequest('GET', $url);
     }
