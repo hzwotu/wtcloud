@@ -35,7 +35,7 @@ class EditSignInRuleDto extends NormalBaseDto
         if (empty($params['sid'])) {
             throw new \ErrorException('站点不能为空');
         }
-        return $this->formatParam($params, $this->param, true, ["sid", "checkFace", "distance", "signBefore", "signAfter"]);
+        return $this->formatParam($params, $this->param, true, ["sid", "checkFace", "signBefore", "signAfter"]);
     }
 
 }
