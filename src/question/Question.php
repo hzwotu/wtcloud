@@ -55,4 +55,14 @@ class Question extends QuestionBase
         $url = $this->domainUrl . '/question/front/updateStatus';
         return BaseService::sendNormalRequest('POST', $url , $params);
     }
+
+    /**
+     * 添加试题
+     * @param $params
+     * @return array
+     */
+    public function questionAdd($params) {
+        $url = $this->domainUrl . '/question/front/create';
+        return BaseService::sendNormalRequest('POST', $url , $params);
+    }
 }
