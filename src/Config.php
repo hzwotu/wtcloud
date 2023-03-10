@@ -13,6 +13,7 @@ class Config{
         'id' => 'http://47.98.193.2:39001',
         'common-data' => 'http://47.98.193.2:36026',
         'question' => 'http://47.98.193.2:36076',
+        'sign-in' => 'http://47.98.193.2:36081',
         'gateway' => 'https://api.cloud.wozp.cn'
     ];
 
