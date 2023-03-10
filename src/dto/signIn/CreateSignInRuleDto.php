@@ -16,10 +16,12 @@ class CreateSignInRuleDto extends NormalBaseDto
 
     protected array $param = array(
         "sid" => 0,
+        "signStart" => 0,
         "checkFace" => 0,
         "distance" => 0,
         "signBefore" => 0,
         "signAfter" => 0,
+        "signAfterType" => 0,
         "signOutAfter" => 0,
         "signOutBefore" => ""
     );
@@ -35,7 +37,7 @@ class CreateSignInRuleDto extends NormalBaseDto
         if (empty($params['sid'])) {
             throw new \ErrorException('站点不能为空');
         }
-        return $this->formatParam($params, $this->param, true, ["sid", "checkFace", "signBefore", "signAfter"]);
+        return $this->formatParam($params, $this->param, true, ["sid", "checkFace", "signBefore", "signAfter","signAfterType"]);
     }
 
 }
