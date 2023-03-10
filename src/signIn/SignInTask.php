@@ -13,7 +13,7 @@ use Wotu\BaseService;
 use Wotu\dto\signIn\CreateSignInTaskDto;
 use Wotu\dto\signIn\EditSignInTaskDto;
 
-class SignIn extends SignInBase
+class SignInTask extends SignInBase
 {
 
     /**
