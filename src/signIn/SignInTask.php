@@ -13,7 +13,7 @@ use Wotu\BaseService;
 use Wotu\dto\signIn\CreateSignInTaskDto;
 use Wotu\dto\signIn\EditSignInTaskDto;
 
-class SignIn extends SignInBase
+class SignInTask extends SignInBase
 {
 
     /**
@@ -45,14 +45,12 @@ class SignIn extends SignInBase
     /**
      * 获取用户签到信息
      * @param $taskCode
-     * @param string $userCode
      * @return array|mixed|string
      */
-    public function getUserSignInfo($taskCode, $userCode = '')
+    public function getUserSignInfo($taskCode)
     {
         $url = $this->domainUrl . '/sign_in/task/sign_info/' . $taskCode;
-        $params['userCode'] = $userCode;
-        return BaseService::sendNormalRequest('GET', $url, $params);
+        return BaseService::sendNormalRequest('GET', $url, []);
     }
 
     /**

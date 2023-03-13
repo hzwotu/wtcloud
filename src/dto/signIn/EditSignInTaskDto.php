@@ -23,7 +23,8 @@ class EditSignInTaskDto extends NormalBaseDto
         "location" => "",
         "lon" => "",
         "lat" => "",
-        "rule_code" => ""
+        "ruleCode" => "",
+        "code" => ""
     );
 
     public function __construct()
@@ -37,7 +38,7 @@ class EditSignInTaskDto extends NormalBaseDto
         if (empty($params['sid'])) {
             throw new \ErrorException('站点不能为空');
         }
-        return $this->formatParam($params, $this->param, true, ["title", "sid", "startTime", "endTime","location","rule_code"]);
+        return $this->formatParam($params, $this->param, true, ["code","title", "sid", "startTime", "endTime","location","ruleCode"]);
     }
 
 }
