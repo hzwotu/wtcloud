@@ -12,6 +12,7 @@ class Config{
         'admin' => 'http://47.99.92.21:36021',
         'id' => 'http://47.99.92.21:39001',
         'common-data' => 'http://47.99.92.21:36026',
+        'sign-in' => 'http://47.99.92.21:36081',
         'gateway' => 'https://api-pre.cloud.wozp.cn'
     ];
 
