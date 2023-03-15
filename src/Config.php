@@ -6,14 +6,14 @@ use ErrorException;
 class Config{
     private $serviceDomain = [
 //        'auth' => 'http://localhost:36006',
-        'form' => 'http://47.99.92.21:36031',
-        'auth' => 'http://47.99.92.21:36006',
-        'finance' => 'http://47.99.92.21.2:36015',
-        'admin' => 'http://47.99.92.21:36021',
-        'id' => 'http://47.99.92.21:39001',
-        'common-data' => 'http://47.99.92.21:36026',
-        'question' => 'http://47.99.92.21:36076',
-        'sign-in' => 'http://47.99.92.21:36081',
+        'form' => 'http://192.168.0.34:36031',
+        'auth' => 'http://192.168.0.34:36006',
+        'finance' => 'http://192.168.0.34.2:36015',
+        'admin' => 'http://192.168.0.34:36021',
+        'id' => 'http://192.168.0.34:39001',
+        'common-data' => 'http://192.168.0.34:36026',
+        'question' => 'http://192.168.0.34:36076',
+        'sign-in' => 'http://192.168.0.34:36081',
         'gateway' => 'https://api-pre.cloud.wozp.cn'
     ];
 
