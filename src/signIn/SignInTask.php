@@ -64,5 +64,21 @@ class SignInTask extends SignInBase
         return BaseService::sendNormalRequest('GET', $url, []);
     }
 
+    /**
+     * 批量获取用户签到信息
+     * @param $userCode
+     * @param array $taskCodes
+     * @return array|mixed|string
+     */
+    public function getSignList($userCode, $taskCodes)
+    {
+        $url = $this->domainUrl . '/sign_in/task/list_sign_history';
+        $params = [
+            'userCode' => $userCode,
+            'taskCodes' => $taskCodes
+        ];
+        return BaseService::sendNormalRequest('POST', $url, $params);
+    }
+
 
 }
