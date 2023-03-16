@@ -157,6 +157,33 @@ class ZipKin {
     }
 
     /**
+     * 开始一个根span
+     */
+    public function start(): void
+    {
+        self::$rootSpan->start();
+    }
+
+    /**
+     * 设置 SPAN 名称
+     * @param string $name Span名称
+     */
+    public function setName(string $name): void
+    {
+        self::$rootSpan->setName($name);
+    }
+
+    /**
+     * 设置 TAG 标签
+     * @param string $key Tag的键
+     * @param string $value Tag的值
+     */
+    public function setTag(string $key, string $value): void
+    {
+        self::$rootSpan->tag($key, $value);
+    }
+
+    /**
      * @desc: 获取链路的唯一标识
      * @return mixed
      * @author Tinywan(ShaoBo Wan)
