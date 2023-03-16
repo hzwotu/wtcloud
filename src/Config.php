@@ -12,7 +12,9 @@ class Config{
         'admin' => 'http://192.168.2.90:36021',
         'id' => 'http://192.168.2.90:39001',
         'common-data' => 'http://192.168.2.90:36026',
-        'gateway' => 'https://api.cloud.wozhipei.com'
+        'question' => 'http://192.168.2.90:36076',
+        'sign-in' => 'http://192.168.2.90:36081',
+        'gateway' => 'https://api.cloud.wozhipei.com',
     ];
 
     private $domainUrl;
