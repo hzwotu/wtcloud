@@ -36,7 +36,7 @@ class CreateStaffDto extends NormalBaseDto
             if(empty($item['sid'])){
                 throw new \ErrorException('站点不能为空');
             }
-            $itemData = $this->formatParam($item, $this->staffItem, true, ["name", "idCard","mobile","organizationCode"]);
+            $itemData = $this->formatParam($item, $this->staffItem, true, ["name","mobile","organizationCode"]);
             if(empty($itemData)){
                 throw new \ErrorException('入参数据格式异常');
             }
