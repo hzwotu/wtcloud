@@ -7,15 +7,17 @@ use Wotu\dto\NormalBaseDto;
 class CreateUserDto extends NormalBaseDto
 {
 
-    protected $param = array(
+    protected array $param = array(
+        "groupList" => [],
         "idCard" => "",
         "isCertify" => false,
+        "isInitPassword" => false,
         "mobile" => "",
         "name" => "",
         "password" => "",
-        "source" => 0,
         "sid" => 0,
-        "groupList" => []
+        "source" => 0,
+        "username" => ''
     );
 
 
