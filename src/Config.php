@@ -5,12 +5,12 @@ use ErrorException;
 
 class Config{
     private $serviceDomain = [
-        'form' => 'http://47.98.193.2:36006',
-        'auth' => 'http://47.98.193.2:36006',
-        'finance' => 'http://47.98.193.2:36015',
-        'admin' => 'http://47.98.193.2:36021',
-        'id' => 'http://47.98.193.2:39001',
-        'common-data' => 'http://47.98.193.2:36026',
+        'form' => 'http://192.168.0.11:36006',
+        'auth' => 'http://192.168.0.11:36006',
+        'finance' => 'http://192.168.0.11:36015',
+        'admin' => 'http://192.168.0.11:36021',
+        'id' => 'http://192.168.0.11:39001',
+        'common-data' => 'http://192.168.0.11:36026',
         'gateway' => 'https://api.cloud.wozp.cn'
     ];
 
