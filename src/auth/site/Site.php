@@ -65,7 +65,6 @@ class Site extends AuthBase {
     {
         $url = $this->domainUrl . '/auth/backend/site/detail/'.$sid;
         return BaseService::sendNormalRequest('GET', $url);
-
     }
 
 }
