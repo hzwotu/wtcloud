@@ -65,4 +65,24 @@ class Question extends QuestionBase
         $url = $this->domainUrl . '/question/front/create';
         return BaseService::sendNormalRequest('POST', $url , $params);
     }
+
+    /**
+     * 根据要素细目表和鉴定点codeList查询
+     * @param $params
+     * @return array
+     */
+    public function pointList($params) {
+        $url = $this->domainUrl . '/question/front/point/list';
+        return BaseService::sendNormalRequest('POST', $url , $params);
+    }
+
+    /**
+     * 批量更新推荐状态
+     * @param $params
+     * @return array
+     */
+    public function batchUpdateStatus($params) {
+        $url = $this->domainUrl . '/question/front/batch_update_status';
+        return BaseService::sendNormalRequest('POST', $url , $params);
+    }
 }
