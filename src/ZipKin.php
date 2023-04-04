@@ -54,9 +54,9 @@ class ZipKin {
      * @throws \Exception
      * @author Tinywan(ShaoBo Wan)
      */
-    public static function getInstance(string $httpReporterURL = '', string $appName = 'default', int $timeout = null): ?ZipKin
+    public static function getInstance(string $httpReporterURL = '', string $appName = 'default', int $timeout = null, bool $isResident = false): ?ZipKin
     {
-        if (self::$tracer === null ) {
+        if (self::$tracer === null || $isResident) {
             if(empty($httpReporterURL)) throw new \Exception('链路错误');
             self::$appName = $appName ;
             $localIp = $_SERVER["REMOTE_ADDR"] ?? getHostByName(getHostName());
@@ -100,7 +100,8 @@ class ZipKin {
      * @desc: 结束整个程序
      * @param array $tagArr
      */
-    public  function endAction(array $tagArr = []){
+    public  function endAction(array $tagArr = [], $isResident = false)
+    {
         if ($tagArr !== []) {
             foreach ($tagArr as $key => $val) {
                 self::$rootSpan->tag($key, $val);
@@ -108,6 +109,10 @@ class ZipKin {
         }
         self::$rootSpan->finish();
         $tracers = self::$tracer;
+        if ($isResident) {
+            $tracers->flush();
+            return;
+        }
         register_shutdown_function(function () use ($tracers) {
             $tracers->flush();
         });
