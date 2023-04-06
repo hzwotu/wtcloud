@@ -4,6 +4,7 @@ use Wotu\auth\AuthBase;
 use Wotu\BaseService;
 use Wotu\dto\user\CreateSsoUserDto;
 use Wotu\dto\user\CreateUserDto;
+use Wotu\dto\user\UserLoginByOpenIdDto;
 use Wotu\dto\user\UserLoginDto;
 
 
@@ -103,6 +104,19 @@ class User extends AuthBase {
     public function login($params){
         $url = $this->gatewayDomainUrl . '/auth/user/v1/login';
         $requestDto = new UserLoginDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
+
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * sdk 第三方用户登陆
+     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95API/getAccessTokenByOpenIdUsingPOST
+     */
+    public function loginByOpenid($params) {
+        $url = $this->gatewayDomainUrl . '/auth/login/access_token_by_openid';
+        $requestDto = new UserLoginByOpenIdDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
