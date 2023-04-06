@@ -106,18 +106,4 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
-    /**
-     * @param $params
-     * @return mixed|string
-     * @throws \ErrorException
-     * sdk 第三方单点登录创建用户
-     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/ssoCreateUserUsingPOST
-     */
-    public function ssoCreate($params)
-    {
-        $url = $this->gatewayDomainUrl . '/auth/user/v1/sso_create';
-        $requestDto = new CreateSsoUserDto();
-        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
-    }
-
 }
