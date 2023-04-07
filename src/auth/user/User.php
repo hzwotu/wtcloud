@@ -116,7 +116,7 @@ class User extends AuthBase {
      */
     public function loginByOpenid($params)
     {
-        $url = $this->gatewayDomainUrl . '/auth/login/access_token_by_openid';
+        $url = $this->domainUrl . '/auth/login/access_token_by_openid';
         $requestDto = new UserLoginByOpenIdDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
