@@ -3,6 +3,7 @@ namespace Wotu\auth\user;
 use Wotu\auth\AuthBase;
 use Wotu\BaseService;
 use Wotu\dto\user\CreateUserDto;
+use Wotu\dto\user\ModifyPasswordDto;
 use Wotu\dto\user\OpenKeyCreateDto;
 use Wotu\dto\user\OpenLoginDto;
 use Wotu\dto\user\UserLoginDto;
@@ -141,9 +142,18 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('GET', $url, [], true);
     }
 
-
-
-
-
+    /**
+     * @desc: 修改密码
+     * @param $params
+     * @return array|mixed|string
+     * @throws \ErrorException
+     * @author Tinywan(ShaoBo Wan)
+     * @link https://api-develop.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/modifyPasswordUsingPOST
+     */
+    public function ModifyPassword($params){
+        $url = $this->domainUrl . '/auth/user/v1/modify_password';
+        $requestDto = new ModifyPasswordDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
 
 }
