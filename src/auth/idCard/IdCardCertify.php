@@ -2,7 +2,6 @@
 namespace Wotu\auth\idCard;
 use Wotu\auth\AuthBase;
 use Wotu\BaseService;
-use Wotu\dto\idCard\AuditCertificateDto;
 use Wotu\dto\idCard\CertifyIdCardDto;
 
 
@@ -31,8 +30,7 @@ class IdCardCertify extends AuthBase{
     public function auditCertificate($params)
     {
         $url = $this->domainUrl . '/auth/user/v1/audit_certificate';
-        $requestDto = new AuditCertificateDto();
-        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+        return BaseService::sendNormalRequest('POST', $url ,$params);
     }
 
 
