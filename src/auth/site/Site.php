@@ -53,5 +53,19 @@ class Site extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($sid,$baseInfo,$configs,$module));
     }
 
+    /**
+     * 根据站点id获取信息
+     * @param $sid
+     * @return array|mixed|string|void
+     * @throws \ErrorException
+     */
+    public  function getSiteById($sid){
+        if(empty($sid)){
+            throw new \ErrorException('站点id不能为空');
+        }
+        $url = $this->domainUrl . '/auth/backend/site/info/'.$sid;
+        return BaseService::sendNormalRequest('GET', $url ,[]);
+    }
+
 
 }
