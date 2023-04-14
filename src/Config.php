@@ -11,6 +11,9 @@ class Config{
         'admin' => 'http://192.168.0.11:36021',
         'id' => 'http://192.168.0.11:39001',
         'common-data' => 'http://192.168.0.11:36026',
+        'question' => 'http://192.168.0.11:36076',
+        'sign-in' => 'http://192.168.0.11:36081',
+        'job' => 'http://192.168.0.11:36011',
         'gateway' => 'https://api.cloud.wozp.cn'
     ];
 

@@ -19,6 +19,19 @@ class IdCardCertify extends AuthBase{
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
+    /**
+     * 校验护照-其他证件
+     * @param $params
+     * @return array|mixed|string|null
+     * @throws \ErrorException
+     * author summer
+     * date 2023/4/10 10:37
+     */
+    public function auditCertificate($params)
+    {
+        $url = $this->domainUrl . '/auth/user/v1/audit_certificate';
+        return BaseService::sendNormalRequest('POST', $url ,$params);
+    }
 
 
 
