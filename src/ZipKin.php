@@ -54,13 +54,13 @@ class ZipKin {
      * @throws \Exception
      * @author Tinywan(ShaoBo Wan)
      */
-    public static function getInstance(string $httpReporterURL = '', string $appName = 'default'): ?ZipKin
+    public static function getInstance(string $httpReporterURL = '', string $appName = 'default', int $timeout = null): ?ZipKin
     {
         if (self::$tracer === null ) {
             if(empty($httpReporterURL)) throw new \Exception('链路错误');
             self::$appName = $appName ;
             $localIp = $_SERVER["REMOTE_ADDR"] ?? getHostByName(getHostName());
-            $tracing = self::createTracing(self::$appName, $localIp,$httpReporterURL);
+            $tracing = self::createTracing(self::$appName, $localIp,$httpReporterURL, null, $timeout);
             self::$tracing = $tracing;
 
             $request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
@@ -200,9 +200,15 @@ class ZipKin {
      * @param null $localServicePort
      * @return DefaultTracing|\Zipkin\Tracing
      */
-    public static function createTracing($localServiceName, $localServiceIPv4,$httpReporterURL , $localServicePort = null){
+    public static function createTracing($localServiceName, $localServiceIPv4, $httpReporterURL, $localServicePort = null, $timeout = null)
+    {
+        $options = ['endpoint_url' => $httpReporterURL];
+        if ($timeout !== null) {
+            $options['timeout'] = $timeout;
+        }
+
         $endpoint = Endpoint::create($localServiceName, $localServiceIPv4, null, $localServicePort);
-        $reporter = new \Zipkin\Reporters\Http(['endpoint_url' => $httpReporterURL]);
+        $reporter = new \Zipkin\Reporters\Http($options);
         $sampler = BinarySampler::createAsAlwaysSample();
         return TracingBuilder::create()
             ->havingLocalEndpoint($endpoint)
