@@ -154,7 +154,7 @@ class User extends AuthBase {
      * @link https://api-develop.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/modifyPasswordUsingPOST
      */
     public function ModifyPassword(array $params, array $header){
-        $url = $this->domainUrl . '/auth/user/v1/modify_password';
+        $url = $this->gatewayDomainUrl . '/auth/user/v1/modify_password';
         $requestDto = new ModifyPasswordDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params),true , $header);
     }
