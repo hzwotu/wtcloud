@@ -10,6 +10,7 @@ class CreateUserDto extends NormalBaseDto
     protected $param = array(
         "idCard" => "",
         "isCertify" => false,
+        "certificateType" => 0,
         "mobile" => "",
         "name" => "",
         "password" => "",
