@@ -12,6 +12,7 @@ class CreateUserDto extends NormalBaseDto
         "idCard" => "",
         "isCertify" => false,
         "isInitPassword" => false,
+        "certificateType" => 0,
         "mobile" => "",
         "name" => "",
         "password" => "",
