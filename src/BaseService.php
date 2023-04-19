@@ -18,9 +18,8 @@ class BaseService
      * @throws \GuzzleHttp\Exception\GuzzleException
      * 发送服务请求
      */
-    public static function sendRequest($method, $url, $data = [], $needToken = false)
+    public static function sendRequest($method, $url, $data = [], $needToken = false,$headers = [])
     {
-        $headers = [];
         if (ZipKin::$tracer) {
             $zipKin = ZipKin::getInstance();
             //在一个请求的初试位置 开启一个链路追踪
@@ -75,7 +74,7 @@ class BaseService
     public static function sendNormalRequest($method, $url, $data = [], $needToken = false, $header = [])
     {
         if(self::$openZipkin){
-            return self::sendRequest($method, $url, $data, $needToken );
+            return self::sendRequest($method, $url, $data, $needToken ,$header );
         }else{
             return self::send($method, $url, $data, $needToken , $header);
         }
@@ -86,10 +85,14 @@ class BaseService
         $resultHeader = [];
         if(!empty($header)){
             foreach ($header as $key=>$value){
-                $resultHeader[] = $key .':' . $value;
+                if(!in_array($key,['AUTHORIZATION','X-SITE-ALIAS'])){
+                    $resultHeader[] = $key .':' . $value;
+                }
+
             }
         }
         $headers = self::getHeader();
+        $headers = array_merge($headers,$header);
         if (!empty($headers['AUTHORIZATION']) && $needToken) {
             $resultHeader[] = 'Authorization:' . $headers['AUTHORIZATION'];
             if(isset($headers['X-SITE-ALIAS'])) $resultHeader[] = 'X-Site-Alias:' . $headers['X-SITE-ALIAS'];
@@ -103,12 +106,10 @@ class BaseService
         } else {
             $result = Http::send($url, $method, [], json_encode($data), $resultHeader,1);
         }
-//        var_dump($resultHeader);
         $resultData = json_decode($result, true);
         if (!empty($resultData['httpCode']) && $resultData['httpCode'] == 401) {
             http_response_code(401);exit;
         }
-
         if (empty($resultData['messageCode'])) {
             $errorMessage = $resultData['message'] ?? '请求失败';
             throw new \ErrorException($errorMessage);
