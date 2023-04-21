@@ -216,19 +216,4 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
-    /**
-     * 编辑
-     * @param $params
-     * @return array|mixed|string|null
-     * author summer
-     * date 2023/4/12 14:14
-     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0-%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86API/editUsingPOST
-     */
-    public function edit($params)
-    {
-        $url = $this->domainUrl . '/auth/backend/account/edit';
-        return BaseService::sendNormalRequest('POST', $url , $params);
-    }
-
-
 }
