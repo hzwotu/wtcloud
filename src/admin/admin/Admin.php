@@ -31,4 +31,10 @@ class Admin extends AdminBase
         $requestDto = new RolePermissionCheckDto();
         return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params), true);
     }
+
+    public function permissionList()
+    {
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/permission_list';
+        return BaseService::sendNormalRequest('POST', $url);
+    }
 }
