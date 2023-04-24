@@ -35,6 +35,6 @@ class Admin extends AdminBase
     public function permissionList()
     {
         $url = $this->gatewayDomainUrl . '/admin/v1.1/permission_list';
-        return BaseService::sendNormalRequest('POST', $url);
+        return BaseService::sendNormalRequest('GET', $url, [], true);
     }
 }
