@@ -16,7 +16,7 @@ class Admin extends AdminBase
         }
         $data['codeList'] = $params;
         $url = $this->gatewayDomainUrl . '/admin/v1.1/list';
-        return BaseService::sendNormalRequest('POST', $url, $data,true);
+        return BaseService::sendNormalRequest('POST', $url, $data, true);
     }
 
     public function getAdminIfo()
