@@ -37,4 +37,10 @@ class Admin extends AdminBase
         $url = $this->gatewayDomainUrl . '/admin/v1.1/permission_list';
         return BaseService::sendNormalRequest('GET', $url, [], true);
     }
+
+    public function permissionAuth($header, $route)
+    {
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/role_permission/authz_phpsdk';
+        return BaseService::sendNormalRequest('POST', $url, ['apiRoute' => $route], true, $header);
+    }
 }
