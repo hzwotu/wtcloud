@@ -1,6 +1,7 @@
 <?php
 namespace Wotu\auth\organization;
 use Wotu\auth\AuthBase;
+use Wotu\auth\OrganizationBase;
 use Wotu\BaseService;
 use Wotu\dto\organization\CheckPermissionsDto;
 use Wotu\dto\organization\CreateDepartmentDto;
@@ -12,7 +13,7 @@ use Wotu\dto\organization\EditDepartmentDto;
 use Wotu\dto\organization\EditModulesDto;
 use Wotu\dto\organization\EditOrganizationDto;
 
-class Organization extends AuthBase{
+class Organization extends OrganizationBase {
 
     /**
      * @param $organizationCode
@@ -25,7 +26,7 @@ class Organization extends AuthBase{
         if(empty($organizationCode)){
             throw new \ErrorException('组织编码不能为空');
         }
-        $url = $this->domainUrl . '/auth/organization/organization_detail/'.$organizationCode;
+        $url = $this->domainUrl . '/organization/organization/organization_detail/'.$organizationCode;
         return BaseService::sendNormalRequest('GET', $url ,[]);
     }
 
@@ -37,7 +38,7 @@ class Organization extends AuthBase{
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%BB%84%E7%BB%87API/createPHPSdkUsingPOST
      */
     public function create($params){
-        $url = $this->domainUrl . '/auth/organization/create_php';
+        $url = $this->domainUrl . '/organization/organization/create_php';
         $requestDto = new CreateOrganizationDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
@@ -50,7 +51,7 @@ class Organization extends AuthBase{
      *https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%BB%84%E7%BB%87API/editUsingPOST
      */
     public function edit($params){
-        $url = $this->domainUrl . '/auth/organization/edit';
+        $url = $this->domainUrl . '/organization/organization/edit';
         $requestDto = new EditOrganizationDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
@@ -63,7 +64,7 @@ class Organization extends AuthBase{
      *https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%BB%84%E7%BB%87API/deleteOrganizationUsingPOST
      */
     public function deleteOrganization($organizationCode){
-        $url = $this->domainUrl . '/auth/organization/delete_organization';
+        $url = $this->domainUrl . '/organization/organization/delete_organization';
         $requestDto = new DeleteOrganizationDto();
         $params = array(
             'code' => $organizationCode
@@ -82,7 +83,7 @@ class Organization extends AuthBase{
         if(empty($organizationCode)){
             throw new \ErrorException('组织编码不能为空');
         }
-        $url = $this->domainUrl . '/auth/organization/department/tree/'.$organizationCode;
+        $url = $this->domainUrl . '/organization/department/tree/'.$organizationCode;
         return BaseService::sendNormalRequest('GET', $url ,[]);
     }
 
@@ -94,7 +95,7 @@ class Organization extends AuthBase{
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%BB%84%E7%BB%87API/createDepartmentUsingPOST_1
      */
     public function createDepartment($params){
-        $url = $this->domainUrl . '/auth/organization/create_department';
+        $url = $this->domainUrl . '/organization/department/create_department';
         $requestDto = new CreateDepartmentDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
@@ -107,7 +108,7 @@ class Organization extends AuthBase{
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%BB%84%E7%BB%87API/createDepartmentUsingPOST
      */
     public function editDepartment($params){
-        $url = $this->domainUrl . '/auth/organization/edit_department';
+        $url = $this->domainUrl . '/organization/department/edit_department';
         $requestDto = new EditDepartmentDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
@@ -120,7 +121,7 @@ class Organization extends AuthBase{
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%BB%84%E7%BB%87API/deleteDepartmentUsingPOST
      */
     public function deleteDepartment($departmentCode){
-        $url = $this->domainUrl . '/auth/organization/delete_department';
+        $url = $this->domainUrl . '/organization/department/delete_department';
         $requestDto = new DeleteOrganizationDto();
         $params = array(
             'code' => $departmentCode
@@ -136,7 +137,7 @@ class Organization extends AuthBase{
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%BB%84%E7%BB%87API/createStaffPHPUsingPOST
      */
     public function createStaff($params){
-        $url = $this->domainUrl . '/auth/organization/create_staff_php';
+        $url = $this->domainUrl . '/organization/staff/create_staff_php';
         $requestDto = new CreateStaffDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
@@ -149,7 +150,7 @@ class Organization extends AuthBase{
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%BB%84%E7%BB%87API/deleteStaffPHPUsingPOST
      */
     public function deleteStaff($params){
-        $url = $this->domainUrl . '/auth/organization/delete_staff_php';
+        $url = $this->domainUrl . '/organization/staff/delete_staff_php';
         $requestDto = new DeleteStaffDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
@@ -162,7 +163,7 @@ class Organization extends AuthBase{
      * https://api.cloud.wozp.cn/doc.html#/用户服务/组织API/editOrganizationSiteModuleUsingPOST
      */
     public function editModules($params){
-        $url = $this->domainUrl . '/auth/organization/edit_modules';
+        $url = $this->domainUrl . '/organization/organization/edit_modules';
         $requestDto = new EditModulesDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
@@ -175,14 +176,37 @@ class Organization extends AuthBase{
      * https://api.cloud.wozp.cn/doc.html#/用户服务/组织API/checkPermissionUsingPOST
      */
     public function checkPermissions($params){
-        $url = $this->domainUrl . '/auth/organization/check_permissions';
+        $url = $this->domainUrl . '/organization/organization/check_permissions';
         $requestDto = new CheckPermissionsDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
 
 
+    /**
+     * @param array $param
+     * @return mixed|string
+     * @throws ErrorException
+     *我的组织
+     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/organizationListUsingGET
+     */
+    public  function getMyOrganization(){
+        $url = $this->gatewayDomainUrl . '/organization/organization/organization_list';
+        return BaseService::sendNormalRequest('GET', $url ,[],true);
+    }
 
+    /**
+     * @return array|mixed|string
+     * @throws ErrorException
+     * 用户组织
+     */
+    public  function getUserOrganization($userCode){
+        if(empty($userCode)){
+            throw new ErrorException('用户编码不能为空');
+        }
+        $url = $this->domainUrl . '/organization/organization/user_organization_list/'.$userCode;
+        return BaseService::sendNormalRequest('GET', $url ,[]);
+    }
 
 
 
