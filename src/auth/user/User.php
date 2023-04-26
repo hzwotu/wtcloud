@@ -1,10 +1,13 @@
 <?php
 namespace Wotu\auth\user;
+use ErrorException;
 use Wotu\auth\AuthBase;
 use Wotu\BaseService;
 use Wotu\dto\user\CreateUserDto;
+use Wotu\dto\user\ModifyPasswordDto;
 use Wotu\dto\user\OpenKeyCreateDto;
 use Wotu\dto\user\OpenLoginDto;
+use Wotu\dto\user\ResetPasswordDto;
 use Wotu\dto\user\UserLoginDto;
 
 
@@ -13,7 +16,7 @@ class User extends AuthBase {
     /**
      * @param array $param
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      *当前用户信息
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/queryByCodeUsingGET
      */
@@ -25,7 +28,7 @@ class User extends AuthBase {
 
     public  function getUserInfoByCode($userCode){
         if(empty($userCode)){
-            throw new \ErrorException('用户编码不能为空');
+            throw new ErrorException('用户编码不能为空');
         }
         $url = $this->domainUrl . '/auth/user/v1/user_info/'.$userCode;
         return BaseService::sendNormalRequest('GET', $url ,[]);
@@ -34,7 +37,7 @@ class User extends AuthBase {
     /**
      * @param $params
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * sdk 创建用户
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/createUserUsingPOST
      */
@@ -75,7 +78,7 @@ class User extends AuthBase {
     /**
      * @param array $param
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      *我的组织
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/organizationListUsingGET
      */
@@ -86,12 +89,12 @@ class User extends AuthBase {
 
     /**
      * @return array|mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * 用户组织
      */
     public  function getUserOrganization($userCode){
         if(empty($userCode)){
-            throw new \ErrorException('用户编码不能为空');
+            throw new ErrorException('用户编码不能为空');
         }
         $url = $this->domainUrl . '/auth/user/v1/user_organization_list/'.$userCode;
         return BaseService::sendNormalRequest('GET', $url ,[]);
@@ -100,7 +103,7 @@ class User extends AuthBase {
     /**
      * @param array $param
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      *我的用户组
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/groupListUsingGET
      */
@@ -111,12 +114,12 @@ class User extends AuthBase {
 
     /**
      * @return array|mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * 用户的用户组
      */
     public  function getUserGroup($userCode){
         if(empty($userCode)){
-            throw new \ErrorException('用户编码不能为空');
+            throw new ErrorException('用户编码不能为空');
         }
         $url = $this->domainUrl . '/auth/user/v1/user_group_list/'.$userCode;
         return BaseService::sendNormalRequest('GET', $url ,[]);
@@ -125,7 +128,7 @@ class User extends AuthBase {
     /**
      * @param $params
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * sdk 用户登陆
      * https://api.cloud.wozp.cn/doc.html#/用户服务/用户API/loginUsingPOST
      */
@@ -138,7 +141,7 @@ class User extends AuthBase {
     /**
      * @param $params
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * sdk 开放平台登陆
      * https://api.cloud.wozp.cn/doc.html#/用户服务/用户端-开放API/getTokenUsingPOST
      */
@@ -151,7 +154,7 @@ class User extends AuthBase {
     /**
      * @param $params
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * sdk 开放平台登陆
      * https://api.cloud.wozp.cn/doc.html#/用户服务/用户端-开放API/getTokenUsingPOST
      */
@@ -169,9 +172,34 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('GET', $url, [], true);
     }
 
+    /**
+     * @desc: 修改密码
+     * @param array $params
+     * @param array $header
+     * @return array|mixed|string
+     * @throws ErrorException
+     * @author Tinywan(ShaoBo Wan)
+     * @link https://api-develop.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/modifyPasswordUsingPOST
+     */
+    public function ModifyPassword(array $params, array $header){
+        $url = $this->gatewayDomainUrl . '/auth/user/v1/modify_password';
+        $requestDto = new ModifyPasswordDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params),true , $header);
+    }
 
-
-
-
+    /**
+     * @desc: 重置密码-php临时-只开放内网
+     * @param array $params
+     * @param array $header
+     * @return array|mixed|string
+     * @throws ErrorException
+     * @author Tinywan(ShaoBo Wan)
+     * @link https://api-pre.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0-%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86API/resetPasswordPhpUsingPOST
+     */
+    public function ResetPassword(array $params, array $header){
+        $url = $this->domainUrl . '/auth/backend/account/reset_password_php';
+        $requestDto = new ResetPasswordDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params), true , $header);
+    }
 
 }
