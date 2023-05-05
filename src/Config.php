@@ -14,6 +14,7 @@ class Config{
         'question' => 'http://192.168.0.34:36076',
         'sign-in' => 'http://192.168.0.34:36081',
         'job' => 'http://192.168.0.34:36011',
+        'organization' => 'http://192.168.0.34:36106',
         'gateway' => 'https://api-pre.cloud.wozp.cn'
     ];
 
