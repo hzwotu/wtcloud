@@ -18,6 +18,7 @@ class CreateOrganizationDto extends NormalBaseDto
         "certifyImage" => "",//工商照片
         "companyCode" => "",//统一信用代码
         "userCode" => "",//组织拥有者用户编码
+        "logo" => "" //组织logo
     );
 
     public function __construct()
