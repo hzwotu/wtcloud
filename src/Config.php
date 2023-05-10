@@ -20,7 +20,7 @@ class Config{
 
     private $serviceDomain = [
 //        'auth' => 'http://localhost:36006',
-        'form' => 'http://47.98.193.2:36006',
+        'form' => 'http://47.98.193.2:36031',
         'auth' => 'http://47.98.193.2:36006',
         'finance' => 'http://47.98.193.2:36015',
         'admin' => 'http://47.98.193.2:36021',
