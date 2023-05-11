@@ -75,30 +75,6 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url , $params);
     }
 
-    /**
-     * @param array $param
-     * @return mixed|string
-     * @throws ErrorException
-     *我的组织
-     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/organizationListUsingGET
-     */
-    public  function getMyOrganization(){
-        $url = $this->gatewayDomainUrl . '/auth/user/v1/organization_list';
-        return BaseService::sendNormalRequest('GET', $url ,[],true);
-    }
-
-    /**
-     * @return array|mixed|string
-     * @throws ErrorException
-     * 用户组织
-     */
-    public  function getUserOrganization($userCode){
-        if(empty($userCode)){
-            throw new ErrorException('用户编码不能为空');
-        }
-        $url = $this->domainUrl . '/auth/user/v1/user_organization_list/'.$userCode;
-        return BaseService::sendNormalRequest('GET', $url ,[]);
-    }
 
     /**
      * @param array $param
