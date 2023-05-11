@@ -29,7 +29,7 @@ class Config{
         'question' => 'http://47.98.193.2:36076',
         'sign-in' => 'http://47.98.193.2:36081',
         'job' => 'http://47.98.193.2:36011',
-        'organization' => 'http://localhost:36106',
+        'organization' => 'http://47.98.193.2:36106',
         'gateway' => 'https://api.cloud.wozp.cn',
     ];
 
