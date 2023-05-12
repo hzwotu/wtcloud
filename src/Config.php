@@ -19,7 +19,6 @@ class Config{
         'gateway' => 'https://api.cloud.wozhipei.com',
     ];
 
-
     private $domainUrl;
 
     /**
