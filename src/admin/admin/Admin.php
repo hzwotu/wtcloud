@@ -31,4 +31,29 @@ class Admin extends AdminBase
         $requestDto = new RolePermissionCheckDto();
         return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params), true);
     }
+
+    /**
+     * 根据authorization获取登陆信息
+     *
+     * @author lichang
+     * @param array $header
+     * @return array|mixed|string
+     */
+    public function getAdminInfo(array $header = [])
+    {
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/detail_current';
+        return BaseService::sendNormalRequest('GET', $url, [], true, $header);
+    }
+
+    /**
+     * 获取相应的的业务权限
+     *
+     * @author lichang
+     * @return array|mixed|string
+     */
+    public function getAuthority(array $header, array $params = [])
+    {
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/permission_config';
+        return BaseService::sendNormalRequest('GET', $url, $params, true,$header);
+    }
 }
