@@ -16,7 +16,7 @@ class Admin extends AdminBase
         }
         $data['codeList'] = $params;
         $url = $this->gatewayDomainUrl . '/admin/v1.1/list';
-        return BaseService::sendNormalRequest('POST', $url, $data,true);
+        return BaseService::sendNormalRequest('POST', $url, $data, true);
     }
 
     public function getAdminIfo()
@@ -30,5 +30,17 @@ class Admin extends AdminBase
         $url = $this->gatewayDomainUrl . '/admin/v1.1/role_permission/authz_phpsdk';
         $requestDto = new RolePermissionCheckDto();
         return BaseService::sendNormalRequest('POST', $url, $requestDto->getRequestParam($params), true);
+    }
+
+    public function permissionList()
+    {
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/permission_list';
+        return BaseService::sendNormalRequest('GET', $url, [], true);
+    }
+
+    public function permissionAuth($header, $route)
+    {
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/role_permission/authz_phpsdk';
+        return BaseService::sendNormalRequest('POST', $url, ['apiRoute' => $route], true, $header);
     }
 }
