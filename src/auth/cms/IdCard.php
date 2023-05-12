@@ -42,6 +42,13 @@ class IdCard extends AuthBase{
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
+    /**
+     * 查询实名信息
+     *
+     * @author lichang
+     * @param $params
+     * @return array|mixed|string
+     */
     public function queryInfo($params){
         $url = $this->domainUrl . '/auth/backend/id_card/info_php';
         $requestDto = new DeleteIdCardDto();
