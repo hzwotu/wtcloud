@@ -4,6 +4,7 @@ namespace Wotu;
 use ErrorException;
 
 class Config{
+
     private $serviceDomain = [
         'form' => 'http://192.168.0.11:36006',
         'auth' => 'http://192.168.0.11:36006',
@@ -14,6 +15,7 @@ class Config{
         'question' => 'http://192.168.0.11:36076',
         'sign-in' => 'http://192.168.0.11:36081',
         'job' => 'http://192.168.0.11:36011',
+        'organization' => 'http://192.168.0.11:36106',
         'gateway' => 'https://api.cloud.wozp.cn'
     ];
 

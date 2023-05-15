@@ -21,6 +21,7 @@ class CreateUserDto extends NormalBaseDto
         "username" => '',
         "authType" => "",
         "openId" => "",
+        "avatar" => "",
     );
 
 
