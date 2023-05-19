@@ -19,8 +19,8 @@ class SM4Dto extends NormalBaseDto
      * @var array|string[]
      */
     protected array $param = [
-        'key' => '', // 加/解密key
-        'data' => '', // 加/解密内容不能为空
+        'key' => '', // 加解密key
+        'data' => '', // 加解密内容不能为空
     ];
 
     /**
