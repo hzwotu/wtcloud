@@ -6,6 +6,7 @@ use ErrorException;
 class Config{
 
     private $serviceDomain = [
+        'tool' => 'http://192.168.2.90:36126',
         'form' => 'http://192.168.2.90:36031',
         'auth' => 'http://192.168.2.90:36006',
         'finance' => 'http://192.168.2.90:36015',
