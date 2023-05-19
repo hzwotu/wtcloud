@@ -1,1 +1,34 @@
 # wtcloud
+
+
+## 本地如何调试 @Tinywan
+1. 安装依赖
+```phpregexp
+composer install
+```
+2. 新建`index.php` 测试文件，同时引入依赖包
+```phpregexp
+<?php
+require 'vendor/autoload.php';
+```
+3. 编写测试代码。以下是一个国密SM4解密的测试案例
+```phpregexp
+<?php
+/**
+ * @desc index.php 描述信息
+ * @author Tinywan(ShaoBo Wan)
+ * @date 2023/5/19 10:34
+ */
+declare(strict_types=1);
+
+require 'vendor/autoload.php';
+
+$sm4 = new \Wotu\tool\crypto\utils\SM4();
+$params = [
+    'key' => 'e9d56722cf902909793b3bdcdbe48ce0',
+    'data' => 'BGCr_zox9gCJ4cTyh4FjYkxDP58cWdVjndr54JG0kxt9F40DFxkDvQzxl5KQ6Ir3h1cEdC5H4WwmX7YP3gyDXR77B-dfKO9rlAl5wPY1mF6kTCB2Nyc_BoNp41a7NRvBUX9g8BHuvABSmMCvJvBLPMstAx028sly3Mxw2uD3NUPwc1kkMi9uY8TwJKIdx4ciZUxnc2IkcK-Gkf5Fc-Ta0VOGkPkFWUhK0drK76SbKhOh8Y0c4f1rEZIUUKiXRurZOgBxf3Lm_IoZm5wyCbkXu3VBJNFeyyI4OT0lkIhMwl9WaL8o-7PcResfOhglvKckWfAYEpbcQB2q9ebz0I95h4NwRrbXlqI8bcAJ-mMGPtRU-PGXu3-4nCZJ8rHUDD6OsTnfZmdmF4xYcHVY-Jr3uBLYffqtAQcOhAQQVdwMQyIZLnr339E7Uy1A6HLKWDFbj21aFpI8m7exWz9qK_LfIXZsnKWPoSKkjG6WNO2kpch2v682TzYI4LogIVFV148c69Jfkjhao-Lz0ZACYMW3cv0FRq85vXbkltQts7WJnUhZC5yFDDrw1b7ppoEKO9HMWqESV-RwD3MVd1djBlN5-Tnhop7lpqVi7q8C8qYiv1UZM32X6urnF7_B7tZVaJJ7_Ty9uF-Sqg6CZu2l_FI3v6X0KE61MC820eFcBx5Fgp6QwMKM5blSJTPIYXo4aBIr0G0_GviV6TSJi_NE-f7m3Zl-tIXVs0vbpy3kd45MQ5-SJmt9xL_aTel2WE52P4rzzxJH7QBNyGmsBq5TgxXUUXNiOYoA9a9PmCZEvgVlYS88aUWiUSh9G_hj12qmdBiDHO1ID--kpeQB9D9itY9VlZu_gSWc1MW3Rn3MJarSNOmeJYm6e31cJ-1AJgrQvO9MHqxO3VZNDTaLHbQ-yErMicSBjb61lhZxfErHVQtk1Y9QY2gzH4o3Pfc_PwGi5Qs82Mep7cJkrdqCWEw97k3Ka3PghXJwKsvlpayl91LppHKplL9n206ZdQCjWoNr6HENX1cnCuV7XwMyyAt3ft_vXmsptcAKf5MjC6Mye_ii3nVKvY1Vuo1tbEknakQ-AiVP93-XWKUX_3VXoXyL12Frku3OVGlCKS4Ux9H3LLpRy7lnMOKEG1iDa-cXU04Vgtqec64zs5mepnZ4jzNkyL9yS2fNihtUxraTq66c3pSceSxV3hgRDplZ2GexU4Qcd5yRlLb2V2kdVicYfn9j0JBZr1GoWZ2Kxnv6TKb_Y7yssRW7jXsxESRAgMmCrNUkV_2QFd59RrvpASbgBw3JLnuEKo0IvtwMwgUVgaGi20HGGL4qY5yvZe-y5FM_Q-S0Hy2JNkrLE4ojvYCjjkZsrq7TRP2HIRWmTS36o4iZKwFrsnP28ZiIgRUw15CQF-YVlcU9_UoCZJr0vsdjJ6tGK9AxbyB74lyu2J7J6bwGASjlilCWPi5GcFTHRoU9NepE2BCNZdlnfx71SpV4OToIG2f20XpKCM2uPxK0-pfD7jMyW9YspYbHOgDq3EUzBtLdt1Aig-9QsD3BxQH6Wva0cujalYCBxdkbybj5yND3dYajnSU=',
+];
+$decryptBase64 = $sm4->decryptBase64($params);
+var_dump($decryptBase64);
+```
+
