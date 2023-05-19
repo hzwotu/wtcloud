@@ -2,17 +2,17 @@
 
 
 ## 本地如何调试 @Tinywan
-1. 安装依赖
-```phpregexp
+1、安装依赖
+```php
 composer install
 ```
-2. 新建`index.php` 测试文件，同时引入依赖包
-```phpregexp
+2、新建`index.php` 测试文件，同时引入依赖包
+```php
 <?php
 require 'vendor/autoload.php';
 ```
-3. 编写测试代码。以下是一个国密SM4解密的测试案例
-```phpregexp
+3、编写测试代码。以下是一个国密SM4解密的测试案例
+```php
 <?php
 /**
  * @desc index.php 描述信息
