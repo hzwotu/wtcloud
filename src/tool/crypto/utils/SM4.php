@@ -27,7 +27,7 @@ class SM4 extends ToolBase
     public  function encryptBase64(array $params)
     {
         $requestDto = new SM4Dto();
-        return BaseService::sendNormalRequest('POST',$this->gatewayDomainUrl.'/tool/sm/sm4/encrypt', $requestDto->getRequestParam($params));
+        return BaseService::sendNormalRequest('POST',$this->domainUrl.'/tool/sm/sm4/encrypt', $requestDto->getRequestParam($params));
     }
 
     /**
@@ -40,6 +40,6 @@ class SM4 extends ToolBase
     public function decryptBase64(array $params)
     {
         $requestDto = new SM4Dto();
-        return BaseService::sendNormalRequest('POST',$this->gatewayDomainUrl.'/tool/sm/sm4/decrypt', $requestDto->getRequestParam($params));
+        return BaseService::sendNormalRequest('POST',$this->domainUrl.'/tool/sm/sm4/decrypt', $requestDto->getRequestParam($params));
     }
 }

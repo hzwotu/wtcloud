@@ -17,12 +17,11 @@ use Wotu\dto\NormalBaseDto;
 
 abstract class ToolBase extends BaseRequest
 {
-
     /**
-     * 网关地址
+     * 服务地址
      * @var string
      */
-    public string $gatewayDomainUrl;
+    public string $domainUrl;
 
     /**
      * @var NormalBaseDto
@@ -34,17 +33,16 @@ abstract class ToolBase extends BaseRequest
      */
     public function __construct()
     {
-        $this->gatewayDomainUrl =  (new Config('gateway'))->getServiceDomain();
+        $this->domainUrl =  (new Config('tool'))->getServiceDomain();
     }
 
     /**
      * @param string $method
      * @param array $data
-     * @param false $needToken
      * @return array|mixed|string
      */
-    public function sendNormalRequest(string $method, array $data = [], bool $needToken = false)
+    public function sendNormalRequest(string $method, array $data = [])
     {
-        return BaseService::sendNormalRequest($method, $this->gatewayDomainUrl, $this->dto->getRequestParam($data));
+        return BaseService::sendNormalRequest($method, $this->domainUrl, $this->dto->getRequestParam($data));
     }
 }

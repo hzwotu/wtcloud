@@ -20,6 +20,7 @@ class Config{
 //    ];
 
     private $serviceDomain = [
+        'tool' => 'http://47.98.193.2:36126',
         'form' => 'http://47.98.193.2:36006',
         'auth' => 'http://47.98.193.2:36006',
         'finance' => 'http://47.98.193.2:36015',
