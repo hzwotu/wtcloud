@@ -1,7 +1,4 @@
-# wtcloud
-
-
-## 本地如何调试
+## 本地调试
 1、安装依赖
 ```php
 composer install
