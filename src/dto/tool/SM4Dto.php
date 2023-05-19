@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Wotu\dto\tool;
 
 
+use ErrorException;
 use Wotu\dto\NormalBaseDto;
 
 class SM4Dto extends NormalBaseDto
@@ -18,12 +19,12 @@ class SM4Dto extends NormalBaseDto
      * @var array|string[]
      */
     protected array $param = [
-        "key" => "",
-        "data" => "",
+        'key' => '', // 加/解密key
+        'data' => '', // 加/解密内容不能为空
     ];
 
     /**
-     * CreateRecommendDto constructor.
+     * SM4Dto constructor.
      */
     public function __construct()
     {
@@ -35,10 +36,10 @@ class SM4Dto extends NormalBaseDto
     /**
      * @param $params
      * @return mixed
-     * @throws \ErrorException
+     * @throws ErrorException
      */
     public function getRequestParam($params)
     {
-        return $this->formatParam($params, $this->param);
+        return $this->formatParam($params, $this->param, true, ['key', 'data']);
     }
 }
