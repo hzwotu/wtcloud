@@ -8,7 +8,7 @@ composer install
 <?php
 require 'vendor/autoload.php';
 ```
-3、编写测试代码。以下是一个国密SM4解密的测试案例
+3、编写测试代码
 ```php
 <?php
 /**
@@ -28,4 +28,4 @@ $params = [
 $decryptBase64 = $sm4->decryptBase64($params);
 var_dump($decryptBase64);
 ```
-
+> 以上是一个国密SM4解密的测试案例
