@@ -46,7 +46,7 @@ class Admin extends AdminBase
     }
 
     /**
-     * 获取相应的的业务权限
+     * 获取相应的的业务权限(https://api.cloud.wozp.cn/doc.html#/%E7%AE%A1%E7%90%86%E5%91%98%E6%9C%8D%E5%8A%A1/%E7%AE%A1%E7%90%86%E5%91%98%E8%A7%92%E8%89%B2%E6%9D%83%E9%99%90API/permissionConfigUsingGET)
      *
      * @author lichang
      * @return array|mixed|string
@@ -55,5 +55,19 @@ class Admin extends AdminBase
     {
         $url = $this->gatewayDomainUrl . '/admin/v1.1/permission_config';
         return BaseService::sendNormalRequest('GET', $url, $params, true,$header);
+    }
+
+    /**
+     * 创建管理员(https://api.cloud.wozp.cn/doc.html#/%E7%AE%A1%E7%90%86%E5%91%98%E6%9C%8D%E5%8A%A1/%E7%AE%A1%E7%90%86%E5%91%98API/saveUsingPOST)
+     *
+     * @author lichang
+     * @param array $header
+     * @param array $params
+     * @return array|mixed|string
+     */
+    public function createManager(array $header, array $params)
+    {
+        $url = $this->gatewayDomainUrl . '/admin/v1.1/save';
+        return BaseService::sendNormalRequest('POST', $url, $params,true, $header);
     }
 }
