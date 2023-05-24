@@ -192,4 +192,26 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
+    /**
+     * 更新用户账号信息（临时使用）
+     * @param $params
+     * @return array|mixed|string
+     */
+    public function UpdateUsername($params)
+    {
+        $url = $this->domainUrl . '/auth/user/v1/temp/update_username';
+        return BaseService::sendNormalRequest('POST', $url ,$params);
+    }
+
+    /**
+     * 用户第三方授权绑定
+     * @param $params
+     * @return array|mixed|string
+     */
+    public function userAuthBind($params)
+    {
+        $url = $this->domainUrl . '/auth/login/user_auth_bind_php';
+        return BaseService::sendNormalRequest('POST', $url ,$params);
+    }
+
 }
