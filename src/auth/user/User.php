@@ -7,6 +7,7 @@ use Wotu\dto\user\CreateUserDto;
 use Wotu\dto\user\ModifyPasswordDto;
 use Wotu\dto\user\OpenKeyCreateDto;
 use Wotu\dto\user\OpenLoginDto;
+use Wotu\dto\user\UserLoginByOpenIdDto;
 use Wotu\dto\user\ResetPasswordDto;
 use Wotu\dto\user\UserLoginDto;
 
@@ -75,30 +76,6 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url , $params);
     }
 
-    /**
-     * @param array $param
-     * @return mixed|string
-     * @throws ErrorException
-     *我的组织
-     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/organizationListUsingGET
-     */
-    public  function getMyOrganization(){
-        $url = $this->gatewayDomainUrl . '/auth/user/v1/organization_list';
-        return BaseService::sendNormalRequest('GET', $url ,[],true);
-    }
-
-    /**
-     * @return array|mixed|string
-     * @throws ErrorException
-     * 用户组织
-     */
-    public  function getUserOrganization($userCode){
-        if(empty($userCode)){
-            throw new ErrorException('用户编码不能为空');
-        }
-        $url = $this->domainUrl . '/auth/user/v1/user_organization_list/'.$userCode;
-        return BaseService::sendNormalRequest('GET', $url ,[]);
-    }
 
     /**
      * @param array $param
@@ -200,6 +177,41 @@ class User extends AuthBase {
         $url = $this->domainUrl . '/auth/backend/account/reset_password_php';
         $requestDto = new ResetPasswordDto();
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params), true , $header);
+    }
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * sdk 第三方用户登陆
+     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95API/getAccessTokenByOpenIdUsingPOST
+     */
+    public function loginByOpenid($params)
+    {
+        $url = $this->domainUrl . '/auth/login/access_token_by_openid';
+        $requestDto = new UserLoginByOpenIdDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
+
+    /**
+     * 更新用户账号信息（临时使用）
+     * @param $params
+     * @return array|mixed|string
+     */
+    public function UpdateUsername($params)
+    {
+        $url = $this->domainUrl . '/auth/user/v1/temp/update_username';
+        return BaseService::sendNormalRequest('POST', $url ,$params);
+    }
+
+    /**
+     * 用户第三方授权绑定
+     * @param $params
+     * @return array|mixed|string
+     */
+    public function userAuthBind($params)
+    {
+        $url = $this->domainUrl . '/auth/login/user_auth_bind_php';
+        return BaseService::sendNormalRequest('POST', $url ,$params);
     }
 
 }
