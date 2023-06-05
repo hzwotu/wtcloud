@@ -16,7 +16,7 @@ class Config{
         'question' => 'http://47.98.193.2:36076',
         'sign-in' => 'http://47.98.193.2:36081',
         'job' => 'http://47.98.193.2:36011',
-        'questionnaireBase' => 'http://47.98.193.2:36121',
+        'questionnaire' => 'http://47.98.193.2:36121',
         'organization' => 'http://47.98.193.2:36106',
         'gateway' => 'https://api.cloud.wozhipei.com',
     ];

@@ -10,6 +10,6 @@ class QuestionnaireBase extends BaseRequest {
     public string $domainUrl;
 
     public function __construct() {
-        $this->domainUrl =  (new Config('questionnaireBase'))->getServiceDomain();
+        $this->domainUrl =  (new Config('questionnaire'))->getServiceDomain();
     }
 }
