@@ -16,6 +16,7 @@ class Config{
         'sign-in' => 'http://192.168.2.90:36081',
         'job' => 'http://192.168.2.90:36011',
         'organization' => 'http://192.168.2.90:36106',
+        'exam-main' => 'http://192.168.2.90:37101',
         'gateway' => 'https://api.cloud.wozhipei.com',
     ];
 
