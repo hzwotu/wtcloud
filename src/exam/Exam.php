@@ -13,7 +13,7 @@ use Wotu\BaseService;
 
 class Exam extends ExamBase
 {
-    public function uploadSingleVideo($params) {
+    public function uploadSingleVideo($params, $header = []) {
         $arr = [
             'cloud' => 1,
             'fileType' => 1,
@@ -22,6 +22,6 @@ class Exam extends ExamBase
         ];
         $params = array_merge($arr, $params);
         $url = $this->domainUrl . '/upload/singleUpload';
-        return BaseService::sendNormalRequest('POST', $url , $params);
+        return BaseService::sendNormalRequest('POST', $url , $params, false, $header);
     }
 }
