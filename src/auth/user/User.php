@@ -1,8 +1,14 @@
 <?php
 namespace Wotu\auth\user;
+use ErrorException;
 use Wotu\auth\AuthBase;
 use Wotu\BaseService;
 use Wotu\dto\user\CreateUserDto;
+use Wotu\dto\user\ModifyPasswordDto;
+use Wotu\dto\user\OpenKeyCreateDto;
+use Wotu\dto\user\OpenLoginDto;
+use Wotu\dto\user\UserLoginByOpenIdDto;
+use Wotu\dto\user\ResetPasswordDto;
 use Wotu\dto\user\UserLoginDto;
 
 
@@ -11,7 +17,7 @@ class User extends AuthBase {
     /**
      * @param array $param
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      *当前用户信息
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/queryByCodeUsingGET
      */
@@ -23,7 +29,7 @@ class User extends AuthBase {
 
     public  function getUserInfoByCode($userCode){
         if(empty($userCode)){
-            throw new \ErrorException('用户编码不能为空');
+            throw new ErrorException('用户编码不能为空');
         }
         $url = $this->domainUrl . '/auth/user/v1/user_info/'.$userCode;
         return BaseService::sendNormalRequest('GET', $url ,[]);
@@ -32,7 +38,7 @@ class User extends AuthBase {
     /**
      * @param $params
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * sdk 创建用户
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/createUserUsingPOST
      */
@@ -43,34 +49,38 @@ class User extends AuthBase {
     }
 
     /**
-     * @param array $param
-     * @return mixed|string
-     * @throws \ErrorException
-     *我的组织
-     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/organizationListUsingGET
+     * 编辑前预检查
+     * @param $params
+     * @return array|mixed|string|null
+     * author summer
+     * date 2023/4/12 14:10
+     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0-%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86API/editPreCheckUsingPOST
      */
-    public  function getMyOrganization(){
-        $url = $this->gatewayDomainUrl . '/auth/user/v1/organization_list';
-        return BaseService::sendNormalRequest('GET', $url ,[],true);
+    public function frontEditCheck($params)
+    {
+        $url = $this->domainUrl . '/auth/backend/account/edit_pre_check';
+        return BaseService::sendNormalRequest('POST', $url , $params);
     }
 
     /**
-     * @return array|mixed|string
-     * @throws \ErrorException
-     * 用户组织
+     * 编辑
+     * @param $params
+     * @return array|mixed|string|null
+     * author summer
+     * date 2023/4/12 14:14
+     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0-%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86API/editUsingPOST
      */
-    public  function getUserOrganization($userCode){
-        if(empty($userCode)){
-            throw new \ErrorException('用户编码不能为空');
-        }
-        $url = $this->domainUrl . '/auth/user/v1/user_organization_list/'.$userCode;
-        return BaseService::sendNormalRequest('GET', $url ,[]);
+    public function edit($params)
+    {
+        $url = $this->domainUrl . '/auth/backend/account/edit';
+        return BaseService::sendNormalRequest('POST', $url , $params);
     }
+
 
     /**
      * @param array $param
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      *我的用户组
      * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/groupListUsingGET
      */
@@ -81,12 +91,12 @@ class User extends AuthBase {
 
     /**
      * @return array|mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * 用户的用户组
      */
     public  function getUserGroup($userCode){
         if(empty($userCode)){
-            throw new \ErrorException('用户编码不能为空');
+            throw new ErrorException('用户编码不能为空');
         }
         $url = $this->domainUrl . '/auth/user/v1/user_group_list/'.$userCode;
         return BaseService::sendNormalRequest('GET', $url ,[]);
@@ -95,7 +105,7 @@ class User extends AuthBase {
     /**
      * @param $params
      * @return mixed|string
-     * @throws \ErrorException
+     * @throws ErrorException
      * sdk 用户登陆
      * https://api.cloud.wozp.cn/doc.html#/用户服务/用户API/loginUsingPOST
      */
@@ -105,10 +115,103 @@ class User extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
     }
 
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws ErrorException
+     * sdk 开放平台登陆
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/用户端-开放API/getTokenUsingPOST
+     */
+    public function openLogin($params){
+        $url = $this->gatewayDomainUrl . '/auth/app_token/get_token';
+        $requestDto = new OpenLoginDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
 
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws ErrorException
+     * sdk 开放平台登陆
+     * https://api.cloud.wozp.cn/doc.html#/用户服务/用户端-开放API/getTokenUsingPOST
+     */
+    public function CreateOpenKeyByUserCode($params){
+        $url = $this->gatewayDomainUrl . '/auth/backend/app_token/bind';
+        $requestDto = new OpenKeyCreateDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params),true);
+    }
 
+    /**
+     * @return mixed|string
+     */
+    public function logout(){
+        $url = $this->gatewayDomainUrl . '/auth/user/v1/logout';
+        return BaseService::sendNormalRequest('GET', $url, [], true);
+    }
 
+    /**
+     * @desc: 修改密码
+     * @param array $params
+     * @param array $header
+     * @return array|mixed|string
+     * @throws ErrorException
+     * @author Tinywan(ShaoBo Wan)
+     * @link https://api-develop.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%94%A8%E6%88%B7API/modifyPasswordUsingPOST
+     */
+    public function ModifyPassword(array $params, array $header){
+        $url = $this->gatewayDomainUrl . '/auth/user/v1/modify_password';
+        $requestDto = new ModifyPasswordDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params),true , $header);
+    }
 
+    /**
+     * @desc: 重置密码-php临时-只开放内网
+     * @param array $params
+     * @param array $header
+     * @return array|mixed|string
+     * @throws ErrorException
+     * @author Tinywan(ShaoBo Wan)
+     * @link https://api-pre.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0-%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86API/resetPasswordPhpUsingPOST
+     */
+    public function ResetPassword(array $params, array $header){
+        $url = $this->domainUrl . '/auth/backend/account/reset_password_php';
+        $requestDto = new ResetPasswordDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params), true , $header);
+    }
+    /**
+     * @param $params
+     * @return mixed|string
+     * @throws \ErrorException
+     * sdk 第三方用户登陆
+     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95API/getAccessTokenByOpenIdUsingPOST
+     */
+    public function loginByOpenid($params)
+    {
+        $url = $this->domainUrl . '/auth/login/access_token_by_openid';
+        $requestDto = new UserLoginByOpenIdDto();
+        return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($params));
+    }
 
+    /**
+     * 更新用户账号信息（临时使用）
+     * @param $params
+     * @return array|mixed|string
+     */
+    public function UpdateUsername($params)
+    {
+        $url = $this->domainUrl . '/auth/user/v1/temp/update_username';
+        return BaseService::sendNormalRequest('POST', $url ,$params);
+    }
+
+    /**
+     * 用户第三方授权绑定
+     * @param $params
+     * @return array|mixed|string
+     */
+    public function userAuthBind($params)
+    {
+        $url = $this->domainUrl . '/auth/login/user_auth_bind_php';
+        return BaseService::sendNormalRequest('POST', $url ,$params);
+    }
 
 }

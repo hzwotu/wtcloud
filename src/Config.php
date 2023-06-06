@@ -4,27 +4,23 @@ namespace Wotu;
 use ErrorException;
 
 class Config{
-//    private $serviceDomain = [
-////        'auth' => 'http://localhost:36006',
-//        'form' => 'http://114.55.62.34:36031',
-//        'auth' => 'http://114.55.62.34:36006',
-//        'finance' => 'http://114.55.62.34:36015',
-//        'admin' => 'http://114.55.62.34:36021',
-//        'id' => 'http://114.55.62.34:39001',
-//        'common-data' => 'http://114.55.62.34:36026',
-//        'gateway' => 'https://api.cloud.wozhipei.com'
-//    ];
 
-    // 测试
-    private array $serviceDomain = [
+    private $serviceDomain = [
+        'tool' => 'http://47.98.193.2:36126',
         'form' => 'http://47.98.193.2:36031',
         'auth' => 'http://47.98.193.2:36006',
         'finance' => 'http://47.98.193.2:36015',
         'admin' => 'http://47.98.193.2:36021',
         'id' => 'http://47.98.193.2:39001',
         'common-data' => 'http://47.98.193.2:36026',
-        'gateway' => 'https://api.cloud.wozp.cn'
+        'question' => 'http://47.98.193.2:36076',
+        'sign-in' => 'http://47.98.193.2:36081',
+        'job' => 'http://47.98.193.2:36011',
+        'questionnaire' => 'http://47.98.193.2:36121',
+        'organization' => 'http://47.98.193.2:36106',
+        'gateway' => 'https://api.cloud.wozhipei.com',
     ];
+
 
     private $domainUrl;
 

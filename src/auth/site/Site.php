@@ -53,5 +53,32 @@ class Site extends AuthBase {
         return BaseService::sendNormalRequest('POST', $url ,$requestDto->getRequestParam($sid,$baseInfo,$configs,$module));
     }
 
+    /**
+     * 根据站点id获取信息
+     * @param $sid
+     * @return array|mixed|string|void
+     * @throws \ErrorException
+     */
+    public  function getSiteById($sid){
+        if(empty($sid)){
+            throw new \ErrorException('站点id不能为空');
+        }
+        $url = $this->domainUrl . '/auth/backend/site/info/'.$sid;
+        return BaseService::sendNormalRequest('GET', $url ,[]);
+    }
+
+    /**
+     * 获取某个站点配置
+     * @param $sid
+     * @return array|mixed|string|null
+     * author summer
+     * date 2023/4/3 16:58
+     * https://api.cloud.wozp.cn/doc.html#/%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1/%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0-%E7%AB%99%E7%82%B9%E7%AE%A1%E7%90%86API/detailUsingGET
+     */
+    public function detailSite($sid)
+    {
+        $url = $this->domainUrl . '/auth/backend/site/detail/'.$sid;
+        return BaseService::sendNormalRequest('GET', $url);
+    }
 
 }
