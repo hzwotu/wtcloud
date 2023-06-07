@@ -15,7 +15,7 @@ class Exam extends ExamBase
 {
     public function uploadSingleVideo($params, $header = []) {
         $arr = [
-            'cloud' => 1,
+            'cloudType' => 1,
             'fileType' => 1,
             'serverName' => 'exam_api',
             'type' => 2
