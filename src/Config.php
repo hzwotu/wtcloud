@@ -20,7 +20,6 @@ class Config{
     ];
 
     private $domainUrl;
-
     /**
      * @throws ErrorException
      */
