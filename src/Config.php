@@ -16,6 +16,7 @@ class Config{
         'question' => 'http://192.168.2.90:36076',
         'sign-in' => 'http://192.168.2.90:36081',
         'job' => 'http://192.168.2.90:36011',
+        'questionnaire' => 'http://192.168.2.90:36121',
         'organization' => 'http://192.168.2.90:36106',
         'gateway' => 'https://api.cloud.wozhipei.com',
     ];
