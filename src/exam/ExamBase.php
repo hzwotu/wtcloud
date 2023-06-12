@@ -16,5 +16,6 @@ class ExamBase extends BaseRequest
     public  $domainUrl;
     public function __construct() {
         $this->domainUrl =  (new Config('exam-main'))->getServiceDomain();
+        $this->domainUrl .= '/exam-main';
     }
 }
